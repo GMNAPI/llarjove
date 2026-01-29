@@ -22,7 +22,7 @@ export const serverConfig = {
 };
 
 export const openaiConfig = {
-  apiKey: getEnvVar('OPENAI_API_KEY'),
+  apiKey: getEnvVar('OPENAI_API_KEY', ''),  // Will fail on chat, but server can start
 };
 
 export const ragConfig: RAGConfig = {
