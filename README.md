@@ -145,3 +145,4 @@ pnpm build        # Compilar TypeScript
 ## Llicència
 
 MIT
+
