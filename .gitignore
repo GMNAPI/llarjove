@@ -28,5 +28,5 @@ coverage/
 *.tmp
 *.temp
 
-# Vector store (large, generated)
-data/vector_store.json
+# Vector store - included for production deployment
+# data/vector_store.json
