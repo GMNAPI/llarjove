@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LlarJove - Ajuda per trobar habitatge</title>
+  <style>
+    :root {
+      --blanc: white;
+      --fons: #1a1f2e;
+      --fons-card: #252b3b;
+      --accent: #f59e0b;
+      --accent-light: #fbbf24;
+      --text: #e2e8f0;
+      --text-soft: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--fons);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blanc);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.1rem;
+    }
+
+    /* Resources section */
+    .resources {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .resource-card {
+      background: var(--fons-card);
+      border-radius: 12px;
+      padding: 1.25rem;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      transition: all 0.2s;
+    }
+
+    .resource-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .resource-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--blanc);
+    }
+
+    .resource-card p {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .resource-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-light);
+    }
+
+    .tag.deadline {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+    }
+
+    .tag.open {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+    }
+
+    /* Chat container */
+    .chat-container {
+      background: var(--fons-card);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .response-area {
+      min-height: 180px;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+    }
+
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 180px;
+      color: var(--text-soft);
+    }
+
+    .empty-state svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+      color: var(--accent);
+    }
+
+    .response { display: none; }
+    .response.visible { display: block; }
+
+    .answer {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      white-space: pre-wrap;
+    }
+
+    .metadata {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--fons);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+    }
+
+    .meta-item.high { border-left: 3px solid var(--success); }
+    .meta-item.medium { border-left: 3px solid var(--warning); }
+    .meta-item.low { border-left: 3px solid var(--error); }
+    .meta-item.source { border-left: 3px solid var(--accent); }
+
+    .loading {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 180px;
+    }
+
+    .loading.visible { display: flex; }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--fons);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 1rem;
+      color: var(--text-soft);
+    }
+
+    .suggestions {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+    }
+
+    .suggestions-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .suggestion-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: var(--accent-light);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: var(--accent);
+    }
+
+    .input-area {
+      display: flex;
+      padding: 1rem;
+      gap: 0.75rem;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      background: var(--fons);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      color: var(--blanc);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]::placeholder {
+      color: var(--text-soft);
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: var(--fons);
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: var(--accent-light);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .error {
+      display: none;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .error.visible { display: block; }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--text-soft);
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">🏠</div>
+      <h1>Llar<span>Jove</span></h1>
+      <p class="subtitle">Troba el teu habitatge a Catalunya</p>
+    </header>
+
+    <!-- Resources section -->
+    <div class="resources" id="resourcesSection">
+      <div class="resource-card">
+        <h3>Bono Alquiler Joven 2025</h3>
+        <p>Fins a 250€/mes durant 24 mesos</p>
+        <div class="resource-meta">
+          <span class="tag">18-35 anys</span>
+          <span class="tag deadline">⚠️ 11-07-2025</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <h3>Borsa Jove d'Habitatge</h3>
+        <p>Habitatges a preus per sota de mercat</p>
+        <div class="resource-meta">
+          <span class="tag">18-35 anys</span>
+          <span class="tag open">Obert</span>
+        </div>
+      </div>
+      <div class="resource-card">
+        <h3>Ajudes Generalitat</h3>
+        <p>Ajudes complementàries 20-250€/mes</p>
+        <div class="resource-meta">
+          <span class="tag">Catalunya</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-container">
+      <div class="response-area">
+        <div class="empty-state" id="emptyState">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
+          <span>Pregunta'm sobre ajudes, requisits o els teus drets</span>
+        </div>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          <span class="loading-text">Consultant informació...</span>
+        </div>
+
+        <div class="error" id="error"></div>
+
+        <div class="response" id="response">
+          <div class="answer" id="answer"></div>
+          <div class="metadata" id="metadata"></div>
+        </div>
+      </div>
+
+      <div class="suggestions">
+        <div class="suggestions-title">Preguntes freqüents</div>
+        <div class="suggestion-chips">
+          <span class="chip" onclick="askQuestion(this.textContent)">Què és el Bono Alquiler Joven?</span>
+          <span class="chip" onclick="askQuestion(this.textContent)">Quins requisits necessito?</span>
+          <span class="chip" onclick="askQuestion(this.textContent)">Quant preavís per marxar del pis?</span>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input
+          type="text"
+          id="questionInput"
+          placeholder="Escriu la teva pregunta..."
+          onkeypress="if(event.key === 'Enter') sendQuestion()"
+        >
+        <button id="sendBtn" onclick="sendQuestion()">Enviar</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>LlarJove &middot; Ajudant joves a trobar llar a Catalunya</p>
+    </footer>
+  </div>
+
+  <script>
+    const input = document.getElementById('questionInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const emptyState = document.getElementById('emptyState');
+    const loading = document.getElementById('loading');
+    const error = document.getElementById('error');
+    const response = document.getElementById('response');
+    const answerEl = document.getElementById('answer');
+    const metadata = document.getElementById('metadata');
+
+    function askQuestion(question) {
+      input.value = question;
+      sendQuestion();
+    }
+
+    function createMetaItem(className, label, value) {
+      const div = document.createElement('div');
+      div.className = 'meta-item ' + className;
+
+      const labelSpan = document.createElement('span');
+      labelSpan.textContent = label;
+
+      const valueStrong = document.createElement('strong');
+      valueStrong.textContent = value;
+
+      div.appendChild(labelSpan);
+      div.appendChild(valueStrong);
+      return div;
+    }
+
+    async function sendQuestion() {
+      const question = input.value.trim();
+      if (!question) return;
+
+      emptyState.classList.remove('visible');
+      emptyState.style.display = 'none';
+      loading.classList.add('visible');
+      error.classList.remove('visible');
+      response.classList.remove('visible');
+      sendBtn.disabled = true;
+
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question })
+        });
+
+        if (!res.ok) throw new Error('Error en la resposta del servidor');
+
+        const data = await res.json();
+
+        answerEl.textContent = data.answer;
+
+        while (metadata.firstChild) {
+          metadata.removeChild(metadata.firstChild);
+        }
+
+        if (data.confidence) {
+          const labels = { high: 'Alta', medium: 'Mitjana', low: 'Baixa', none: 'Sense dades' };
+          const confidenceLabel = labels[data.confidence] || data.confidence;
+          metadata.appendChild(createMetaItem(data.confidence, 'Confiança:', confidenceLabel));
+        }
+
+        if (data.sources && data.sources.length > 0) {
+          const sourcesList = data.sources.map(function(s) {
+            return s.article + ', ' + s.law;
+          }).join(' | ');
+          metadata.appendChild(createMetaItem('source', 'Fonts:', sourcesList));
+        }
+
+        loading.classList.remove('visible');
+        response.classList.add('visible');
+
+      } catch (err) {
+        loading.classList.remove('visible');
+        error.textContent = 'Error: ' + err.message;
+        error.classList.add('visible');
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+
+    // Load resources from API
+    async function loadResources() {
+      try {
+        const res = await fetch('/resources');
+        if (!res.ok) return;
+        const data = await res.json();
+        // Could dynamically render resource cards here
+      } catch (e) {
+        console.log('Resources API not available yet');
+      }
+    }
+
+    loadResources();
+  </script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+{
+	"info": {
+		"_postman_id": "legalbot-rag-api",
+		"name": "LegalBot RAG API",
+		"description": "Colección de Postman para la API de LegalBot RAG - Sistema de chatbot legal basado en RAG para leyes españolas de bienes raíces",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "legalbot-rag"
+	},
+	"item": [
+		{
+			"name": "Root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Endpoint raíz que devuelve información sobre la API y los endpoints disponibles"
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "Verifica el estado de salud del servidor y la conexión con el vector store"
+			},
+			"response": []
+		},
+		{
+			"name": "Stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/stats",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"stats"
+					]
+				},
+				"description": "Obtiene estadísticas del sistema: número de documentos y modelos utilizados"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Chat - Pregunta simple",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Cuánto preaviso necesito para no renovar un contrato de alquiler?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Pregunta simple sin historial de conversación"
+					},
+					"response": []
+				},
+				{
+					"name": "Chat - Con historial",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Y quién paga las obras de mantenimiento?\",\n  \"history\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"¿Cuánto preaviso necesito para no renovar un contrato de alquiler?\"\n    },\n    {\n      \"role\": \"assistant\",\n      \"content\": \"Según la LAU, si eres arrendatario debes avisar con al menos 2 meses de antelación...\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Pregunta con historial de conversación previo"
+					},
+					"response": []
+				},
+				{
+					"name": "Chat - Streaming",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Quién paga las obras de mantenimiento en un piso alquilado?\",\n  \"stream\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Chat con respuesta en streaming (Server-Sent Events)"
+					},
+					"response": []
+				},
+				{
+					"name": "Chat - Obras de mantenimiento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Quién paga las obras de mantenimiento en un piso alquilado?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Ejemplo de pregunta sobre obras de mantenimiento (debe citar LAU Art. 21 y 22)"
+					},
+					"response": []
+				},
+				{
+					"name": "Chat - Negocio en comunidad",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Puedo poner un negocio en mi piso de una comunidad de propietarios?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Ejemplo de pregunta sobre negocios en comunidad (debe citar LPH Art. 7)"
+					},
+					"response": []
+				},
+				{
+					"name": "Chat - Pregunta fuera de contexto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Cuánto es el ITP en Barcelona?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/chat",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							]
+						},
+						"description": "Ejemplo de pregunta fuera del contexto legal (debe responder que no tiene información)"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para interactuar con el chatbot legal"
+		},
+		{
+			"name": "Retrieve",
+			"item": [
+				{
+					"name": "Retrieve - Debug simple",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Cuánto preaviso necesito para no renovar un contrato de alquiler?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/retrieve",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"retrieve"
+							]
+						},
+						"description": "Obtiene los chunks relevantes para una pregunta sin generar respuesta (útil para debugging)"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve - Obras mantenimiento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"¿Quién paga las obras de mantenimiento en un piso alquilado?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/retrieve",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"retrieve"
+							]
+						},
+						"description": "Obtiene chunks relevantes sobre obras de mantenimiento"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints de debug para obtener chunks relevantes sin generar respuesta"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://legalbot-rag-production.up.railway.app",
+			"type": "string",
+			"description": "URL base de la API. Cambiar a http://localhost:3000 para desarrollo local."
+		}
+	]
+}

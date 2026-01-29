@@ -1,0 +1,147 @@
+# LlarJove
+
+> Assistent RAG per ajudar joves catalans a trobar habitatge: informació sobre ajudes, drets i recursos.
+
+## Què és LlarJove?
+
+LlarJove és un chatbot que ajuda joves de 18-35 anys a Catalunya a:
+
+- **Trobar ajudes**: Bono Alquiler Joven, ajudes de la Generalitat, ajudes municipals
+- **Conèixer els seus drets**: LAU, fiança, actualitzacions de lloguer
+- **Connectar amb recursos**: Borsa Jove, HPO, programes actius amb terminis
+
+## Quick Start
+
+### Prerequisits
+
+- Node.js 20+
+- pnpm
+- OpenAI API key
+
+### Instal·lació
+
+```bash
+git clone <repo-url>
+cd llarjove
+pnpm install
+
+# Configurar entorn
+cp .env.example .env
+# Editar .env i afegir OPENAI_API_KEY
+
+# Iniciar servidor
+pnpm dev
+```
+
+### Ús de l'API
+
+```bash
+# Preguntar sobre ajudes
+curl -X POST http://localhost:3000/chat \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Què és el Bono Alquiler Joven i quins requisits té?"}'
+
+# Preguntar sobre drets
+curl -X POST http://localhost:3000/chat \
+  -H "Content-Type: application/json" \
+  -d '{"question": "Quant preavís he de donar per marxar del pis?"}'
+```
+
+### Resposta d'exemple
+
+```json
+{
+  "answer": "El Bono Alquiler Joven és una ajuda de fins a 250€/mes durant 24 mesos per a joves de 18-35 anys. Els requisits principals són:\n\n1. Ingressos ≤ 25.200€ bruts/any\n2. Lloguer ≤ 900€/mes en zones tensionades\n3. No ser propietari d'un altre habitatge\n4. Estar empadronat a l'habitatge\n\n⚠️ Termini 2025: 30 juny - 11 juliol (per ordre d'entrada)\n\n📎 Més info: tramits.gencat.cat",
+  "sources": [...],
+  "confidence": "high"
+}
+```
+
+## Preguntes de Demo
+
+| Pregunta | Tema |
+|----------|------|
+| "Què és el Bono Alquiler Joven?" | Ajudes estatals |
+| "Quins requisits necessito per l'ajuda al lloguer?" | Requisits |
+| "Quant preavís he de donar per marxar del pis?" | Drets inquilí (LAU) |
+| "Qui paga les reparacions del pis?" | Drets inquilí (LAU) |
+| "Què és la Borsa Jove d'Habitatge?" | Recursos Catalunya |
+
+## Arquitectura
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ INGESTA (offline)                                           │
+│ Documents → Chunker → Embeddings → Vector Store             │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│ CONSULTA (runtime)                                          │
+│ Pregunta → Embedding → Cerca semàntica → Rerank             │
+│ → Prompt amb context → GPT-4 → Resposta validada            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Estructura del Projecte
+
+```
+llarjove/
+├── src/
+│   ├── ingestion/       # Càrrega i chunking de documents
+│   ├── retrieval/       # Vector store i reranking
+│   ├── generation/      # Prompts i validació
+│   ├── api/             # Endpoints Fastify
+│   └── rag.ts           # Pipeline principal
+├── data/
+│   ├── ajudes/          # Documents sobre ajudes
+│   ├── drets/           # Drets de l'inquilí
+│   ├── guies/           # Guies pràctiques
+│   ├── laws/            # LAU i altres lleis
+│   └── SOURCES.md       # Llista de fonts oficials
+└── tests/
+```
+
+## Fonts de Dades
+
+| Font | Contingut |
+|------|-----------|
+| [Gencat - Agència Habitatge](https://habitatge.gencat.cat) | Ajudes autonòmiques |
+| [Bono Alquiler Joven](https://tramits.gencat.cat) | Ajuda estatal 250€/mes |
+| [BCN Joves](https://barcelona.cat/joves) | Recursos Barcelona |
+| LAU (Ley 29/1994) | Drets inquilí |
+
+## Configuració
+
+| Variable | Default | Descripció |
+|----------|---------|------------|
+| `OPENAI_API_KEY` | - | Requerit |
+| `MAX_CHUNKS` | 5 | Màx. chunks per consulta |
+| `SIMILARITY_THRESHOLD` | 0.7 | Puntuació mínima similitud |
+
+## Endpoints API
+
+| Mètode | Endpoint | Descripció |
+|--------|----------|------------|
+| POST | `/chat` | Chat principal |
+| GET | `/resources` | Programes actius amb terminis |
+| GET | `/health` | Health check |
+
+## Desenvolupament
+
+```bash
+pnpm dev          # Servidor amb hot reload
+pnpm test         # Tests
+pnpm ingest       # Ingestar documents a Chroma
+pnpm build        # Compilar TypeScript
+```
+
+## Roadmap
+
+- [ ] Frontend web accessible
+- [ ] Notificacions de terminis propers
+- [ ] Integració amb Telegram/WhatsApp
+- [ ] Expansió a altres CCAA
+
+## Llicència
+
+MIT

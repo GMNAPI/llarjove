@@ -1,0 +1,44 @@
+{
+  "name": "llarjove",
+  "version": "0.1.0",
+  "description": "RAG chatbot per ajudar joves catalans a trobar habitatge - Informació sobre ajudes, drets i recursos",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "ingest": "tsx src/scripts/ingest.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "ci": "pnpm typecheck && pnpm test && pnpm build"
+  },
+  "keywords": [
+    "rag",
+    "habitatge",
+    "joves",
+    "catalunya",
+    "ajudes",
+    "vivienda"
+  ],
+  "author": "Charles",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "chromadb": "^1.8.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "openai": "^4.52.7",
+    "pdf-parse": "^1.1.1",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/pdf-parse": "^1.1.4",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
+    "vitest": "^2.0.2"
+  }
+}
