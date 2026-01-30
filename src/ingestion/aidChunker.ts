@@ -72,19 +72,26 @@ interface Section {
 
 /**
  * Split document by ## headers
+ *
+ * Uses split approach instead of regex matching to avoid
+ * issues with multiline mode where $ matches end of line.
  */
 function splitBySections(text: string): Section[] {
   const sections: Section[] = [];
 
-  // Regex to match ## headers
-  const sectionRegex = /^##\s+([^\n]+)\n([\s\S]*?)(?=^##\s+|$)/gm;
+  // Split at ## header boundaries using lookahead
+  const parts = text.split(/(?=^##\s+)/m);
 
-  let match;
-  while ((match = sectionRegex.exec(text)) !== null) {
-    sections.push({
-      title: match[1]?.trim() ?? '',
-      content: match[2]?.trim() ?? '',
-    });
+  for (const part of parts) {
+    // Extract header and content from each part
+    const headerMatch = part.match(/^##\s+([^\n]+)\n?([\s\S]*)/);
+    if (headerMatch) {
+      const title = headerMatch[1]?.trim() ?? '';
+      const content = headerMatch[2]?.trim() ?? '';
+      if (title) {
+        sections.push({ title, content });
+      }
+    }
   }
 
   // If no ## sections found, treat the whole document as one chunk
