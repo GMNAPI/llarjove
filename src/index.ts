@@ -11,7 +11,7 @@ import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { serverConfig } from './config.js';
-import { initVectorStore } from './retrieval/index.js';
+import { initVectorStore, getStats, isLocalMode } from './retrieval/index.js';
 import { registerChatRoutes } from './api/chat.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -33,7 +33,12 @@ async function main(): Promise<void> {
   console.log('Initializing vector store...');
   try {
     await initVectorStore();
-    console.log('Vector store initialized successfully');
+    const stats = await getStats();
+    const mode = isLocalMode() ? 'local' : 'chroma';
+    console.log(`Vector store mode: ${mode}, documents: ${stats.count}`);
+    if (stats.count === 0) {
+      console.warn('WARNING: Vector store is empty. RAG will not return results.');
+    }
   } catch (error) {
     console.warn('Warning: Could not connect to vector store. Some features may not work.');
     console.warn('Make sure Chroma is running: docker-compose up -d chroma');
