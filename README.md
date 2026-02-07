@@ -181,14 +181,17 @@ El projecte es desplega com a **dos serveis** a Railway (mateix repo, dos Docker
 
 ### Configuració a Railway
 
-1. **Servei RAG API**
+Cal **dos serveis** al mateix projecte Railway:
+
+1. **Servei RAG API** (el xat i la API)
    - Build: Dockerfile `./Dockerfile` (o config `railway-api.toml`).
    - Variables: `OPENAI_API_KEY`, `CHROMA_HOST`, `CHROMA_PORT`, `CHROMA_COLLECTION` (si Chroma extern). Railway injecta `PORT`.
    - Health check: `/health`.
+   - En desplegar, Railway assigna una URL (ex: `https://llarjove-api-production.up.railway.app`). **Aquesta URL és on es troba el xat**: en obrir-la al navegador es mostra la interfície del assistent RAG.
 
-2. **Servei Web**
+2. **Servei Web** (landing)
    - Build: Dockerfile `./Dockerfile.web` (o config `railway-web.toml`).
-   - Variables: `NEXT_PUBLIC_API_URL` = URL pública del servei RAG API (ex: `https://llarjove-api.up.railway.app`). Railway injecta `PORT`.
+   - Variables: **`NEXT_PUBLIC_API_URL`** = URL pública del servei RAG API (la mateixa que obres per al xat). Sense aquesta variable, la landing no mostrarà el botó "Probar el chat". Railway injecta `PORT`.
    - Health check: `/`.
 
 Cada servei rep un `PORT` dinàmic; no hi ha conflicte de ports.
