@@ -43,5 +43,3 @@ RUN adduser --system --uid 1001 legalbot
 USER legalbot
 
 CMD ["node", "dist/index.js"]
-
-CMD ["node", "dist/index.js"]
