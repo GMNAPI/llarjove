@@ -131,7 +131,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
                 law: legalMeta.law,
                 title: legalMeta.articleTitle,
                 text: r.chunk.text.slice(0, 500) + '...',
-                embeddingPrefix: r.chunk.embedding?.slice(0, 10), // First 10 values
+                // embeddingPrefix removed - not available in ContentChunk
               };
             } else {
               const aidMeta = meta as AidMetadata;
@@ -141,7 +141,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
                 program: aidMeta.programName,
                 section: aidMeta.section,
                 text: r.chunk.text.slice(0, 500) + '...',
-                embeddingPrefix: r.chunk.embedding?.slice(0, 10), // First 10 values
+                // embeddingPrefix removed - not available in ContentChunk
               };
             }
           }),
@@ -212,7 +212,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
           sampleEmbeddings: sampleChunks.slice(0, 2).map(c => ({
             id: c.chunk.id,
             type: 'programName' in c.chunk.metadata ? 'aid' : 'legal',
-            embeddingPrefix: c.chunk.embedding?.slice(0, 5), // First 5 values
+            score: c.score, // Add score instead - more useful for debugging
           })),
         },
         environment: {
