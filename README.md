@@ -168,7 +168,30 @@ El frontend inclou un **design system complet** amb:
 - **Tailwind v4**: CSS-first configuration amb `@theme inline`
 - **Living style guide**: `/web/src/components/BrandShowcase.tsx`
 
-Visita http://localhost:5173 després de `pnpm dev:web` per veure el showcase.
+Visita http://localhost:3000 després de `pnpm dev:web` per veure la landing i el showcase.
+
+## Deployment (Railway)
+
+El projecte es desplega com a **dos serveis** a Railway (mateix repo, dos Dockerfiles).
+
+| Servei | Dockerfile | Config | Port |
+|--------|------------|--------|------|
+| **RAG API** | `Dockerfile` | `railway-api.toml` | `PORT` (assignat per Railway) |
+| **Web** | `Dockerfile.web` | `railway-web.toml` | `PORT` (assignat per Railway) |
+
+### Configuració a Railway
+
+1. **Servei RAG API**
+   - Build: Dockerfile `./Dockerfile` (o config `railway-api.toml`).
+   - Variables: `OPENAI_API_KEY`, `CHROMA_HOST`, `CHROMA_PORT`, `CHROMA_COLLECTION` (si Chroma extern). Railway injecta `PORT`.
+   - Health check: `/health`.
+
+2. **Servei Web**
+   - Build: Dockerfile `./Dockerfile.web` (o config `railway-web.toml`).
+   - Variables: `NEXT_PUBLIC_API_URL` = URL pública del servei RAG API (ex: `https://llarjove-api.up.railway.app`). Railway injecta `PORT`.
+   - Health check: `/`.
+
+Cada servei rep un `PORT` dinàmic; no hi ha conflicte de ports.
 
 ## Roadmap
 

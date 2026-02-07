@@ -39,6 +39,4 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 legalbot
 USER legalbot
 
-EXPOSE 3000
-
 CMD ["node", "dist/index.js"]
