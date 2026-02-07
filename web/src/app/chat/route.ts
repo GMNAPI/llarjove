@@ -1,13 +1,9 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function GET(_request: NextRequest) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   if (apiUrl) {
     return NextResponse.redirect(apiUrl, 307);
   }
-  return NextResponse.next();
+  return NextResponse.redirect(new URL('/', _request.url), 307);
 }
-
-export const config = {
-  matcher: '/chat',
-};
