@@ -34,11 +34,16 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/src/public ./dist/public
 COPY --from=builder /app/data ./data
 
+# Fix ownership so non-root user can read vector_store.json
+RUN chown -R 1001:1001 /app/data
+
 # Create non-root user
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 legalbot
 USER legalbot
 
 EXPOSE 3000
+
+CMD ["node", "dist/index.js"]
 
 CMD ["node", "dist/index.js"]

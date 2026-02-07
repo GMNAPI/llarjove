@@ -6,7 +6,7 @@
 
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { query, queryStream, retrieve } from '../rag.js';
-import { getStats } from '../retrieval/index.js';
+import { getStats, isLocalMode } from '../retrieval/index.js';
 import { getPrograms, getProgramById, getUpcomingDeadlines } from '../resources/programs.js';
 import type { ChatRequest, ChatResponse, ChatMessage, LegalMetadata, AidMetadata } from '../types.js';
 
@@ -157,6 +157,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
         status: 'healthy',
         vectorStore: {
           connected: true,
+          mode: isLocalMode() ? 'local' : 'chroma',
           documentCount: stats.count,
         },
       };
