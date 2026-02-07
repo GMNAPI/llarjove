@@ -6,8 +6,12 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { dirname } from 'path';
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
 import type { EmbeddedChunk, RetrievalResult, ContentMetadata } from '../types.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface StoredChunk {
   id: string;
@@ -21,7 +25,7 @@ interface VectorStoreData {
   version: number;
 }
 
-const DEFAULT_STORE_PATH = './data/vector_store.json';
+const DEFAULT_STORE_PATH = resolve(__dirname, '../../data/vector_store.json');
 
 let storeData: VectorStoreData = { chunks: [], version: 1 };
 let storePath = DEFAULT_STORE_PATH;
