@@ -86,20 +86,28 @@ interface Section {
 }
 
 /**
- * Split document by ## headers
+ * Split document by ## headers (index-based to avoid regex $ matching EOL in multiline mode)
  */
 function splitBySections(text: string): Section[] {
   const sections: Section[] = [];
-
-  // Regex to match ## headers (lookahead must be \n## so content doesn't end at blank line)
-  const sectionRegex = /^##\s+([^\n]+)\n([\s\S]*?)(?=\n##\s+|$)/gm;
+  const headerRegex = /^##\s+(.+)$/gm;
+  const headers: { title: string; start: number; contentStart: number }[] = [];
 
   let match;
-  while ((match = sectionRegex.exec(text)) !== null) {
-    sections.push({
-      title: match[1]?.trim() ?? '',
-      content: match[2]?.trim() ?? '',
+  while ((match = headerRegex.exec(text)) !== null) {
+    headers.push({
+      title: match[1]!.trim(),
+      start: match.index,
+      contentStart: match.index + match[0].length,
     });
+  }
+
+  for (let i = 0; i < headers.length; i++) {
+    const contentEnd = i + 1 < headers.length
+      ? headers[i + 1]!.start
+      : text.length;
+    const content = text.slice(headers[i]!.contentStart, contentEnd).trim();
+    sections.push({ title: headers[i]!.title, content });
   }
 
   // If no ## sections found, treat the whole document as one chunk
