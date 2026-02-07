@@ -46,11 +46,13 @@ export async function initVectorStore(): Promise<void> {
 
     useLocalStore = false;
     console.log(`Vector store initialized (Chroma): "${chromaConfig.collection}"`);
-  } catch {
+  } catch (error) {
     // Fall back to local JSON store
-    console.log('Chroma server not available, using local JSON store');
+    console.log(`Chroma not available (${String(error)}), using local JSON store`);
     useLocalStore = true;
     await initLocalVectorStore();
+    const stats = await getStatsLocal();
+    console.log(`Local store ready: ${stats.count} chunks loaded`);
   }
 }
 
