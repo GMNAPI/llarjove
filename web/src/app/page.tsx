@@ -85,6 +85,9 @@ export default function Page() {
           </div>
 
           <nav className="hidden sm:flex items-center gap-6 text-sm text-muted-foreground">
+            <Link href="/chat" className="hover:text-foreground font-medium text-primary">
+              Probar el chat
+            </Link>
             <Link href="#como-funciona" className="hover:text-foreground">
               Cómo funciona
             </Link>
@@ -99,12 +102,20 @@ export default function Page() {
             </Link>
           </nav>
 
-          <Link
-            href="#waitlist"
-            className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
-          >
-            Únete a la lista
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/chat"
+              className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
+            >
+              Probar el chat
+            </Link>
+            <Link
+              href="#waitlist"
+              className="hidden sm:inline-flex items-center justify-center rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary"
+            >
+              Únete a la lista
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -133,8 +144,14 @@ export default function Page() {
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="#waitlist"
+                href="/chat"
                 className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-base font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
+              >
+                Probar el asistente
+              </Link>
+              <Link
+                href="#waitlist"
+                className="inline-flex items-center justify-center rounded-xl border border-border bg-card px-5 py-3 text-base font-semibold text-foreground hover:bg-secondary"
               >
                 Únete a la lista
               </Link>
