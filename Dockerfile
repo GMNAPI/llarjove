@@ -3,6 +3,10 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 
+# Set to commit SHA or timestamp in CI to force fresh build (avoids stale cache)
+ARG CACHEBUST=
+RUN echo "Build cache key: ${CACHEBUST}"
+
 # Install dependencies
 COPY package.json pnpm-lock.yaml* ./
 RUN npm install -g pnpm && pnpm install --frozen-lockfile
