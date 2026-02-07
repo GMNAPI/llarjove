@@ -38,3 +38,6 @@ web/vitest.config.d.ts
 
 # Vector store - included for production deployment
 # data/vector_store.json
+
+# Claude Code project files
+.claude/
