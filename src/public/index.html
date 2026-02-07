@@ -184,6 +184,7 @@
     .meta-item.high { border-left: 3px solid var(--success); }
     .meta-item.medium { border-left: 3px solid var(--warning); }
     .meta-item.low { border-left: 3px solid var(--error); }
+    .meta-item.none { border-left: 3px solid #888; }
     .meta-item.source { border-left: 3px solid var(--accent); }
 
     .loading {
@@ -308,6 +309,127 @@
 
     .error.visible { display: block; }
 
+    /* Actionable Fallback Styles */
+    .actionable-section {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 168, 157, 0.15);
+    }
+
+    .resource-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(0, 168, 157, 0.05);
+      border: 1px solid rgba(0, 168, 157, 0.2);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+
+    .resource-link:hover {
+      background: rgba(0, 168, 157, 0.1);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .resource-link .icon {
+      font-size: 1.25rem;
+      min-width: 1.25rem;
+    }
+
+    .resource-link .content {
+      flex: 1;
+    }
+
+    .resource-link .title {
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .resource-link .desc {
+      font-size: 0.875rem;
+      color: var(--text-soft);
+    }
+
+    .actionable-resources {
+      margin-bottom: 1.5rem;
+    }
+
+    .resource-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .checklist {
+      background: var(--fons);
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(0, 168, 157, 0.1);
+    }
+
+    .checklist-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .checklist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .checklist li:before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .follow-up {
+      background: rgba(0, 168, 157, 0.05);
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .follow-up .question {
+      font-style: italic;
+      color: var(--text-soft);
+    }
+
+    .source-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .source-links a {
+      color: var(--accent);
+      text-decoration: underline;
+      font-size: 0.875rem;
+    }
+
+    .source-links a:hover {
+      color: #008F85;
+    }
+
     footer {
       text-align: center;
       margin-top: 2rem;
@@ -379,6 +501,13 @@
         <div class="response" id="response">
           <div class="answer" id="answer"></div>
           <div class="metadata" id="metadata"></div>
+
+          <!-- Actionable fallback section -->
+          <div class="actionable-section" id="actionableSection" style="display:none;">
+            <div class="actionable-resources" id="actionableResources"></div>
+            <div class="checklist" id="checklist" style="display:none;"></div>
+            <div class="follow-up" id="followUp" style="display:none;"></div>
+          </div>
         </div>
       </div>
 
@@ -471,11 +600,134 @@
           metadata.appendChild(createMetaItem(data.confidence, 'Confiança:', confidenceLabel));
         }
 
+        // Render sources as clickable links (if available)
         if (data.sources && data.sources.length > 0) {
-          const sourcesList = data.sources.map(function(s) {
-            return s.article + ', ' + s.law;
-          }).join(' | ');
-          metadata.appendChild(createMetaItem('source', 'Fonts:', sourcesList));
+          const sourcesContainer = document.createElement('div');
+          sourcesContainer.className = 'meta-item source';
+
+          const label = document.createElement('span');
+          label.textContent = 'Fonts: ';
+          sourcesContainer.appendChild(label);
+
+          const linksContainer = document.createElement('div');
+          linksContainer.className = 'source-links';
+
+          data.sources.forEach(function(s, idx) {
+            if (s.url) {
+              const link = document.createElement('a');
+              link.href = s.url;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              link.textContent = s.article + ' (' + s.law + ')';
+              linksContainer.appendChild(link);
+            } else {
+              const text = document.createElement('span');
+              text.textContent = s.article + ', ' + s.law;
+              linksContainer.appendChild(text);
+            }
+
+            // Add separator except for last item
+            if (idx < data.sources.length - 1) {
+              const sep = document.createElement('span');
+              sep.textContent = ' | ';
+              sep.style.color = 'var(--text-soft)';
+              linksContainer.appendChild(sep);
+            }
+          });
+
+          sourcesContainer.appendChild(linksContainer);
+          metadata.appendChild(sourcesContainer);
+        }
+
+        // Render actionable resources (for confidence=none)
+        const actionableSection = document.getElementById('actionableSection');
+        const actionableResources = document.getElementById('actionableResources');
+        const checklistEl = document.getElementById('checklist');
+        const followUpEl = document.getElementById('followUp');
+
+        // Clear previous content (safe DOM manipulation)
+        while (actionableResources.firstChild) {
+          actionableResources.removeChild(actionableResources.firstChild);
+        }
+        while (checklistEl.firstChild) {
+          checklistEl.removeChild(checklistEl.firstChild);
+        }
+        while (followUpEl.firstChild) {
+          followUpEl.removeChild(followUpEl.firstChild);
+        }
+        checklistEl.style.display = 'none';
+        followUpEl.style.display = 'none';
+        actionableSection.style.display = 'none';
+
+        if (data.confidence === 'none' && (data.actionableResources || data.checklist)) {
+          actionableSection.style.display = 'block';
+
+          // Render resources
+          if (data.actionableResources && data.actionableResources.length > 0) {
+            const resourcesTitle = document.createElement('div');
+            resourcesTitle.className = 'resource-title';
+            resourcesTitle.textContent = '📌 Recursos oficials:';
+            actionableResources.appendChild(resourcesTitle);
+
+            data.actionableResources.forEach(function(resource) {
+              const link = document.createElement('a');
+              link.className = 'resource-link';
+              link.href = resource.url;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+
+              const icon = document.createElement('span');
+              icon.className = 'icon';
+              icon.textContent = '🔗';
+
+              const content = document.createElement('div');
+              content.className = 'content';
+
+              const title = document.createElement('div');
+              title.className = 'title';
+              title.textContent = resource.title;
+              content.appendChild(title);
+
+              if (resource.description) {
+                const desc = document.createElement('div');
+                desc.className = 'desc';
+                desc.textContent = resource.description;
+                content.appendChild(desc);
+              }
+
+              link.appendChild(icon);
+              link.appendChild(content);
+              actionableResources.appendChild(link);
+            });
+          }
+
+          // Render checklist
+          if (data.checklist && data.checklist.steps && data.checklist.steps.length > 0) {
+            checklistEl.style.display = 'block';
+
+            const checklistTitle = document.createElement('div');
+            checklistTitle.className = 'checklist-title';
+            checklistTitle.textContent = '✅ ' + data.checklist.title;
+            checklistEl.appendChild(checklistTitle);
+
+            const ul = document.createElement('ul');
+            data.checklist.steps.forEach(function(step) {
+              const li = document.createElement('li');
+              li.textContent = step;
+              ul.appendChild(li);
+            });
+            checklistEl.appendChild(ul);
+          }
+
+          // Render follow-up question
+          if (data.followUpQuestion) {
+            followUpEl.style.display = 'block';
+
+            const question = document.createElement('div');
+            question.className = 'question';
+            question.textContent = '💡 ' + data.followUpQuestion;
+            followUpEl.appendChild(question);
+          }
         }
 
         loading.classList.remove('visible');

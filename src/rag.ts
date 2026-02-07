@@ -68,7 +68,7 @@ export async function query(
 
   // Step 7: Validate and build response
   let response = buildValidatedResponse(answer, retrievedChunks);
-  response = addWarningsIfNeeded(response);
+  response = addWarningsIfNeeded(response, question);
 
   return response;
 }
@@ -121,7 +121,7 @@ export async function queryStream(
 
   // Step 7: Validate
   let response = buildValidatedResponse(fullAnswer, retrievedChunks);
-  response = addWarningsIfNeeded(response);
+  response = addWarningsIfNeeded(response, question);
 
   return response;
 }

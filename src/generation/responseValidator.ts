@@ -8,6 +8,9 @@
  */
 
 import type { RetrievalResult, SourceCitation, ChatResponse, LegalMetadata, AidMetadata } from '../types.js';
+import { getPrograms } from '../resources/programs.js';
+import { getRelevantResources } from '../resources/fallbackResources.js';
+import { getRelevantChecklist } from '../resources/fallbackChecklists.js';
 
 /**
  * Extract citations from a response text
@@ -152,20 +155,122 @@ export function buildValidatedResponse(
 }
 
 /**
- * Post-process response to add warnings if needed
+ * Enrich citations with clickable URLs from known sources
+ * Maps program names and legal references to official URLs
  */
-export function addWarningsIfNeeded(response: ChatResponse): ChatResponse {
+export function enrichCitationsWithUrls(citations: SourceCitation[]): SourceCitation[] {
+  const programs = getPrograms();
+
+  // URL mappings for legal documents
+  const legalUrls: Record<string, string> = {
+    'LAU': 'https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003',
+    'Ley 29/1994': 'https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003',
+    'LPH': 'https://portaljuridic.gencat.cat/eli/es-ct/l/2023/03/21/1',
+    'Llei 1/2023': 'https://portaljuridic.gencat.cat/eli/es-ct/l/2023/03/21/1',
+    'Ley 12/2023': 'https://www.boe.es/buscar/act.php?id=BOE-A-2023-12211',
+  };
+
+  return citations.map(citation => {
+    // Check for program match
+    for (const program of programs) {
+      if (citation.article.toLowerCase().includes(program.name.toLowerCase().split(' ')[0]?.toLowerCase() ?? '') ||
+          program.name.toLowerCase().includes(citation.article.toLowerCase())) {
+        return { ...citation, url: program.url };
+      }
+    }
+
+    // Check for legal document match
+    for (const [lawKey, url] of Object.entries(legalUrls)) {
+      if (citation.law.includes(lawKey)) {
+        return { ...citation, url };
+      }
+    }
+
+    // No URL found, return as is
+    return citation;
+  });
+}
+
+/**
+ * Build contextual fallback message based on question category
+ */
+function buildContextualFallback(question: string): string {
+  const lowerQuestion = question.toLowerCase();
+
+  if (/bono|bo jove|ajud[ae]s?|ayud[ae]s?|subvenci[óo]|borsa|programa/i.test(lowerQuestion)) {
+    return 'No he trobat informació específica sobre aquesta ajuda a la meva base de coneixement. Consulta els recursos oficials següents per obtenir informació actualitzada:';
+  }
+
+  if (/contrat[oe]|contracte|firma|firmar|signar/i.test(lowerQuestion)) {
+    return 'No tinc informació específica sobre aquest aspecte del contracte. Revisa els recursos següents per assegurar-te dels teus drets:';
+  }
+
+  if (/llei|ley|dret|derecho|LAU|LPH/i.test(lowerQuestion)) {
+    return 'No he trobat informació específica sobre aquesta qüestió legal. Consulta els recursos oficials per a més detalls:';
+  }
+
+  return 'No he trobat informació rellevant per respondre aquesta pregunta. Consulta els recursos oficials següents per trobar resposta:';
+}
+
+/**
+ * Generate optional follow-up question to clarify context
+ */
+function generateFollowUpQuestion(question: string): string | undefined {
+  const lowerQuestion = question.toLowerCase();
+
+  // Check if it's an aid question without personal details
+  const isAidQuestion = /quiero|quería|necesito|busco|ayud[ae]|ajud[ae]|subvenci[óo]/i.test(lowerQuestion);
+  const hasPersonalDetails = /\d{2,5}|años|anys|tengo|tinc|soy|edad|edat|ingressos|ingresos|gano|treballo|trabajo|estudi[ao]/i.test(lowerQuestion);
+
+  if (isAidQuestion && !hasPersonalDetails) {
+    return 'Podries especificar la teva edat i situació (estudiant, treballador, etc.) per recomanar-te ajudes específiques?';
+  }
+
+  if (/contrat[oe]|contracte/i.test(lowerQuestion) && !/durada|preu|fiança|precio|precio|duración/i.test(lowerQuestion)) {
+    return 'Tens un contracte ja signat o estàs considerant signar-ne un de nou?';
+  }
+
+  return undefined;
+}
+
+/**
+ * Post-process response to add warnings if needed
+ * @param response The ChatResponse object from buildValidatedResponse
+ * @param originalQuestion The user's original question (required for fallback)
+ */
+export function addWarningsIfNeeded(
+  response: ChatResponse,
+  originalQuestion: string = ''
+): ChatResponse {
+  // For high/medium confidence, enrich citations with URLs
+  if (response.confidence === 'high' || response.confidence === 'medium') {
+    return {
+      ...response,
+      sources: enrichCitationsWithUrls(response.sources),
+    };
+  }
+
   if (response.confidence === 'low') {
     return {
       ...response,
       answer: response.answer + '\n\n_Nota: Aquesta resposta té confiança baixa. Es recomana verificar amb un professional._',
+      sources: enrichCitationsWithUrls(response.sources),
     };
   }
 
+  // NONE: Full actionable fallback with resources + checklist
   if (response.confidence === 'none') {
+    const resources = getRelevantResources(originalQuestion, 3);
+    const checklist = getRelevantChecklist(originalQuestion);
+    const followUp = generateFollowUpQuestion(originalQuestion);
+
     return {
       ...response,
-      answer: 'No he trobat informació rellevant per respondre aquesta pregunta. Et recomano consultar directament amb l\'Agència de l\'Habitatge o un professional.',
+      answer: buildContextualFallback(originalQuestion),
+      sources: [],
+      actionableResources: resources,
+      checklist: checklist,
+      followUpQuestion: followUp,
     };
   }
 
