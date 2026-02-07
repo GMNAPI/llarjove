@@ -9,7 +9,7 @@ RUN echo "Build cache key: ${CACHEBUST}"
 
 # Install dependencies
 COPY package.json pnpm-lock.yaml* ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
+RUN npm install -g pnpm@9 && pnpm install --frozen-lockfile
 
 # Copy source and build
 COPY . .
@@ -23,7 +23,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Install pnpm for production deps
-RUN npm install -g pnpm
+RUN npm install -g pnpm@9
 
 # Copy package files
 COPY package.json pnpm-lock.yaml* ./
@@ -41,7 +41,5 @@ RUN chown -R 1001:1001 /app/data
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 legalbot
 USER legalbot
-
-CMD ["node", "dist/index.js"]
 
 CMD ["node", "dist/index.js"]
