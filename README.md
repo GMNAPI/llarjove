@@ -71,6 +71,17 @@ curl -X POST http://localhost:3000/chat \
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+│ FRONTEND (web/)                                             │
+│ React 19 + Vite 6 + Tailwind v4                            │
+│ Design System: Brand identity + 5 UI components            │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│ API BACKEND                                                 │
+│ Fastify + RAG Pipeline                                      │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
 │ INGESTA (offline)                                           │
 │ Documents → Chunker → Embeddings → Vector Store             │
 └─────────────────────────────────────────────────────────────┘
@@ -86,7 +97,13 @@ curl -X POST http://localhost:3000/chat \
 
 ```
 llarjove/
-├── src/
+├── web/                 # Frontend (React 19 + Vite 6 + Tailwind v4)
+│   ├── src/
+│   │   ├── components/  # UI components + Brand showcase
+│   │   ├── styles/      # Design tokens (colors, typography)
+│   │   └── lib/         # Utilities (cn, etc.)
+│   └── tests/           # 59 tests (vitest + testing-library)
+├── src/                 # Backend API + RAG
 │   ├── ingestion/       # Càrrega i chunking de documents
 │   ├── retrieval/       # Vector store i reranking
 │   ├── generation/      # Prompts i validació
@@ -128,16 +145,35 @@ llarjove/
 
 ## Desenvolupament
 
+### Backend (API + RAG)
 ```bash
 pnpm dev          # Servidor amb hot reload
-pnpm test         # Tests
+pnpm test         # Tests backend
 pnpm ingest       # Ingestar documents a Chroma
 pnpm build        # Compilar TypeScript
 ```
 
+### Frontend (React)
+```bash
+pnpm dev:web      # Dev server (http://localhost:5173)
+pnpm test:web     # Tests frontend (59 tests)
+pnpm build:web    # Build producció
+```
+
+### Brand Design System
+
+El frontend inclou un **design system complet** amb:
+- **Design tokens**: Colors OKLCH, tipografia Geist, espaciat, radis
+- **5 UI components**: Button, Card, Input, Badge, Link
+- **Tailwind v4**: CSS-first configuration amb `@theme inline`
+- **Living style guide**: `/web/src/components/BrandShowcase.tsx`
+
+Visita http://localhost:5173 després de `pnpm dev:web` per veure el showcase.
+
 ## Roadmap
 
-- [ ] Frontend web accessible
+- [x] Frontend web accessible - **Design system implementat** (PR #2)
+- [ ] Integrar frontend amb API backend
 - [ ] Notificacions de terminis propers
 - [ ] Integració amb Telegram/WhatsApp
 - [ ] Expansió a altres CCAA
