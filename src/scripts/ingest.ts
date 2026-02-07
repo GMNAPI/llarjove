@@ -27,11 +27,15 @@ const DATA_DIR = resolve(__dirname, '../../data');
 const LAWS_DIR = resolve(DATA_DIR, 'laws');
 const AIDS_DIR = resolve(DATA_DIR, 'ajudes');
 
-// Aid program registry - maps filenames to program info
+// Aid program registry - maps filenames to program info (more specific keys first)
 const AID_REGISTRY: Record<string, { programName: string; sourceUrl?: string }> = {
   'bono-alquiler-joven': {
     programName: 'Bono Alquiler Joven 2025',
     sourceUrl: 'https://tramits.gencat.cat/es/tramits/tramits-temes/22866_Bo_lloguer_joves',
+  },
+  'ajudes-lloguer-generalitat': {
+    programName: 'Ajudes al lloguer Generalitat 2025',
+    sourceUrl: 'https://habitatge.gencat.cat/ca/ambits/ajuts/subvencionslloguer/joves/',
   },
   'ajudes-generalitat': {
     programName: 'Ajudes al lloguer Generalitat',
@@ -40,6 +44,14 @@ const AID_REGISTRY: Record<string, { programName: string; sourceUrl?: string }> 
   'borsa-jove': {
     programName: 'Borsa Jove d\'Habitatge',
     sourceUrl: 'https://habitatge.gencat.cat',
+  },
+  'drets-basics-inquili': {
+    programName: 'Guia de drets basics de l\'inquili',
+    sourceUrl: 'https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003',
+  },
+  'llei-habitatge-2023': {
+    programName: 'Llei 12/2023 - Zones de mercat residencial tensat',
+    sourceUrl: 'https://habitatge.gencat.cat/ca/ambits/preus-ingressos-i-zones/limit-preu-lloguer/llistat-municipis-zmrt/',
   },
 };
 

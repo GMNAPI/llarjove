@@ -1,16 +1,44 @@
-@import "./styles/fonts.css";
-@import "./styles/tokens.css";
 @import "tailwindcss";
 
+/* LlarJove — Tema (valores directos para que Tailwind genere las utilidades) */
+@theme inline {
+  /* Colores principales */
+  --color-primary: oklch(0.556 0.135 181);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: oklch(0.968 0.007 247);
+  --color-accent: oklch(0.925 0.044 180);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: #ffffff;
+  /* Semánticos */
+  --color-background: oklch(0.985 0.002 247);
+  --color-foreground: oklch(0.234 0.014 253);
+  --color-muted: oklch(0.968 0.007 247);
+  --color-muted-foreground: oklch(0.478 0.014 253);
+  --color-border: oklch(0.918 0.007 247);
+  --color-input: oklch(0.918 0.007 247);
+  --color-ring: oklch(0.556 0.135 181);
+  --color-ring-offset: oklch(0.985 0.002 247);
+  --color-card: #ffffff;
+  --color-card-foreground: oklch(0.234 0.014 253);
+  /* Radios */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: "Geist", system-ui, -apple-system, sans-serif;
   background-color: var(--color-background);
   color: var(--color-foreground);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-#root {
-  min-height: 100vh;
 }

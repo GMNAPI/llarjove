@@ -1,0 +1,57 @@
+# Llei 12/2023 del dret a l'habitatge – Zones de mercat residencial tensat
+
+## Què és?
+
+La **Llei 12/2023, del 24 de maig, pel dret a l'habitatge** (Llei estatal d'habitatge) estableix mesures per moderar els preus del lloguer i incrementar l'oferta d'habitatge assequible. Una de les mesures clau és la declaració de **zones de mercat residencial tensat (zones tensionades)**, àmbits territorials on l'escassetat d'habitatges assequibles i l'augment de les rendes de lloguer justifiquen la intervenció pública. La Generalitat, mitjançant resolucions del Departament de Territori (Resolucions **TER/800/2024** i **TER/2408/2024**), ha declarat **271 municipis catalans** com a zones tensionades, on es limita el preu del lloguer.
+
+## Què és una zona tensionada?
+
+Una **zona de mercat residencial tensat** és un municipi o part d'un municipi on el cost mitjà de la hipoteca o del lloguer més despeses i subministraments supera el 30 % dels ingressos mitjans de les llars, o bé on el preu del lloguer ha augmentat almenys un 3 % per sobre de l'IPC en els últims cinc anys. Aquesta declaració permet aplicar topalls als increments de la renda i obligar a referenciar els nous contractes a un **índex de preus de referència**.
+
+## Llista de municipis declarats zona tensionada a Catalunya
+
+Segons les resolucions publicades al **Diari Oficial de la Generalitat de Catalunya** i a la pàgina de la Generalitat, hi ha **271 municipis** declarats zona tensionada. Les declaracions s'han fet en dues fases: la **Resolució TER/800/2024** (16 de març de 2024) amb **140 municipis**, i la **Resolució TER/2408/2024** (15 d'octubre de 2024) que n'afegeix **131**. Entre els municipis destacats hi figuren:
+
+- **Àrea metropolitana de Barcelona**: Barcelona, l'Hospitalet de Llobregat, Badalona, Cornellà de Llobregat, Esplugues de Llobregat, Sant Adrià de Besòs, Sant Cugat del Vallès, Sant Just Desvern, Santa Coloma de Gramenet, Viladecans, Gavà, Castelldefels, Terrassa, Sabadell, Mataró i Granollers.
+- **Comarques de Girona**: Girona, Salt, Figueres, Blanes, Lloret de Mar, Palafrugell, Palamós, Olot, Banyoles i Roses.
+- **Tarragona i Terres de l'Ebre**: Tarragona, Reus, Salou, Vila-seca, Cambrils, Torredembarra, Tortosa, Amposta i Sant Carles de la Ràpita.
+- **Lleida**: Lleida, Balaguer, Tàrrega, Mollerussa, La Seu d'Urgell, Solsona i Tremp.
+- **Altres municipis destacats**: Vic, Manresa, Igualada, Figaró-Montmany, Olesa de Montserrat, Vilanova i la Geltrú, Vilafranca del Penedès, Sitges, Castellbisbal, Ripoll, Puigcerdà, Falset, Guissona, Cerdanyola del Vallès, Palafolls, Teià, Valls, Rubí, Sant Quirze del Vallès i molts altres.
+
+Per consultar el **llistat complet**, la Generalitat ofereix un document en línia que enumera tots els municipis i un visor interactiu.
+
+## Límits de renda i regulació de preus
+
+En les zones tensionades, les rendes dels **nous contractes de lloguer** estan subjectes a les següents normes:
+
+- **Índex de referència estatal**: la renda inicial no pot superar el valor que estableix l'**índex de preus de referència del lloguer** per a la zona i les característiques de l'habitatge. Aquest índex és consultable al portal del Ministeri d'Habitatge.
+- **Topall d'increment per a grans tenidors** (propietaris amb més de 10 habitatges): la renda del nou contracte no pot superar la renda del contracte anterior actualitzada amb l'índex de revisió (IPC o IRAV), excepte si l'habitatge ha estat rehabilitat o millorat.
+- **Topall d'increment per a petits propietaris**: la renda no pot superar l'índex de referència estatal, encara que la renda anterior fos superior.
+- **Actualització anual limitada**: els increments anuals de les rendes estan limitats al **2 % l'any 2023**, **3 % l'any 2024** i, a partir de **2025**, al nou **Índex de Referència d'Arrendaments d'Habitatge (IRAV)**.
+- **Duració del contracte**: la Llei 12/2023 estableix una durada mínima de **5 anys** (7 anys si el propietari és una persona jurídica) i pròrrogues obligatòries de tres anys, amb noves pròrrogues extraordinàries d'un any per a llars vulnerables i fins a **tres anys addicionals** en zones tensionades.
+- **Despeses d'agència**: les despeses de gestió immobiliària i contractació són a càrrec del propietari, no del llogater.
+- **Fiança i garanties**: la fiança legal es manté en **un mes** de lloguer, i les garanties addicionals no poden superar dos mesos, conforme al que ja preveu la Llei d'Arrendaments Urbans (LAU).
+
+## Duració de la declaració
+
+La declaració d'un municipi com a zona tensionada té una vigència inicial de **tres anys**, prorrogable anualment mentre es mantinguin les condicions de tensió. La Generalitat revisa periòdicament les dades per determinar si cal renovar o aixecar la declaració.
+
+## Drets del inquilí en zones tensionades
+
+Els llogaters que viuen en una zona tensionada gaudeixen de diversos drets addicionals:
+
+- **Control de l'augment anual de la renda**: cap actualització pot superar el 2 % (2023), 3 % (2024) o l'IRAV (2025).
+- **Renovació i pròrrogues obligatòries**: els contractes s'han d'estendre automàticament fins a 3 anys addicionals; si la llar és vulnerable, es pot concedir una pròrroga extraordinària d'1 any, i en zones tensionades fins a 3 anys.
+- **Garanties limitades**: el propietari no pot exigir més d'un mes de fiança i dues mensualitats de garanties addicionals.
+- **El propietari paga les despeses de gestió**: les comissions d'agència i despeses de formalització del contracte les ha d'assumir el propietari.
+- **Dret a la informació**: el propietari ha de proporcionar al llogater el valor de l'índex de referència i la renda de l'anterior contracte perquè es pugui comprovar el compliment dels topalls.
+
+## Enllaços útils
+
+- Llistat oficial de municipis tensionats: https://habitatge.gencat.cat/ca/ambits/preus-ingressos-i-zones/limit-preu-lloguer/llistat-municipis-zmrt/
+- Ministeri d'Habitatge – Índex de preus de referència del lloguer: https://www.mivivienda.es/portal/web/indice-referencia-precios
+- BOE – Llei 12/2023, del 24 de maig, pel dret a l'habitatge: https://www.boe.es/eli/es/l/2023/05/24/12
+
+## Font
+
+Informació basada en la **Llei 12/2023, del dret a l'habitatge** i les resolucions **TER/800/2024** i **TER/2408/2024** de la Generalitat, consultades el **7 de febrer de 2026**. Les dades de municipis tensionats provenen de la llista publicada per la Generalitat, i els límits de renda i drets dels llogaters es basen en la normativa de la Llei 12/2023 i les notes del Ministeri d'Habitatge.

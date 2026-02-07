@@ -16,10 +16,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-primary text-white hover:bg-primary/90',
+  primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
   secondary: 'bg-secondary text-foreground hover:bg-secondary/80',
   outline: 'border border-border bg-transparent hover:bg-accent',
-  destructive: 'bg-destructive text-white hover:bg-destructive/90',
+  destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
   ghost: 'bg-transparent hover:bg-accent',
 };
 

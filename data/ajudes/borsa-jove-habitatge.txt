@@ -1,0 +1,74 @@
+# Borsa Jove d'Habitatge de Barcelona
+
+## Què és?
+
+La **Borsa Jove d'Habitatge de Barcelona** és un servei municipal de mediació gestionat pel **Consorci de l'Habitatge de Barcelona** a través de les oficines d'habitatge. Té l'objectiu d'incrementar l'oferta de lloguer assequible i garantir l'accés a l'habitatge de lloguer per a joves i llars en situació de vulnerabilitat. Mitjançant acords amb propietaris de pisos buits, la Borsa ofereix habitatges amb rendes per sota del preu de mercat i assegura l'acompanyament durant tota la vigència del contracte.
+
+## Requisits
+
+### Edat i perfil
+
+- Dirigit principalment a **joves d'entre 18 i 35 anys** i a llars que compleixin els requisits socials i econòmics establerts. La prioritat s'atorga a persones amb **ingressos no superiors a 2,35 vegades l'IRSC**, tot i que el servei és obert a altres llars amb ingressos fins a 4 vegades l'IRSC.
+
+### Residència i empadronament
+
+- Cal estar **empadronat a Barcelona** o acreditar residència efectiva a la ciutat.
+
+### Ingressos
+
+- **Ingressos mínims**: cal demostrar uns ingressos equivalents a **1 vegada l'IPREM (0,93 vegades l'IRSC)** per garantir la viabilitat econòmica del lloguer.
+- **Ingressos màxims**: no superar les **4 vegades l'IRSC**. Les persones amb ingressos **≤ 2,35 vegades l'IRSC** tenen prioritat de mediació.
+
+### Altres requisits
+
+- Presentar documentació que acrediti la necessitat d'habitatge (resolucions de desnonament, informe dels serveis socials o contracte de lloguer finalitzat).
+- No tenir habitatge en propietat o dret d'ús que cobreixi la necessitat d'habitatge.
+
+## Quantia
+
+No es tracta d'una subvenció directa sinó d'un **servei de mediació** que ofereix diversos avantatges econòmics:
+
+- **Rendes de lloguer inferiors al preu de mercat**: la Borsa negocia amb els propietaris per establir preus ajustats als barems municipals.
+- **Cobertura de despeses inicials**: l'Ajuntament paga el dipòsit (fiança), la primera mensualitat i les despeses de contractació per facilitar l'entrada de la unitat de convivència.
+- **Ajut d'urgència**: es pot concedir una ajuda de fins a **tres mesos de lloguer** a unitats de convivència en situació d'emergència social.
+- **Assessorament i mediació gratuïta**: suport en la signatura del contracte, elaboració d'inventari, assessorament jurídic i mediació en possibles conflictes durant la vigència del contracte.
+
+## Terminis de sol·licitud
+
+La inscripció a la Borsa és **oberta tot l'any**. Les persones interessades poden adreçar-se a qualsevol **oficina d'habitatge de Barcelona** per inscriure's i aportar la documentació requerida.
+
+## Documentació necessària
+
+Segons la guia oficial, cal aportar:
+
+- **Sol·licitud de lloguer** i formulari de declaració de necessitat d'habitatge.
+- **DNI/NIE** de totes les persones que ocuparan l'habitatge.
+- **Documentació acreditativa de la situació d'habitatge** (ordre de desnonament, contracte de lloguer vigent, informe social, etc.).
+- **Contractes de treball** i **tres últimes nòmines** de tots els membres que generen ingressos.
+- **Informe de vida laboral** o certificat d'ingressos equivalents (pensions, subsidis).
+- **Certificat d'empadronament** actualitzat a Barcelona.
+- Documentació addicional segons la situació: llibre de família (menors sense DNI), declaracions d'autònoms, informes d'ingressos en metàl·lic, declaració de renda o certificat d'Hisenda, certificats de pensions o d'ajuts per discapacitat.
+
+## Exclusions
+
+- Persones amb **ingressos superiors al límit de 4 vegades l'IRSC**.
+- Unitats de convivència que disposen d'habitatge adequat o d'un dret d'ús suficient.
+- Contractes signats fora de la mediació de la Borsa o habitatges que no compleixin els requisits de qualitat i habitabilitat establerts pel servei.
+
+## Ajudes alternatives
+
+Altres programes a considerar:
+
+- **Subvencions al lloguer** de la Generalitat per a joves i persones de 36-64 anys (vegeu el document «ajudes-lloguer-generalitat-2025»).
+- **Habitatge de Protecció Oficial (HPO)**: registre de demandants per accedir a habitatges amb protecció oficial.
+- **Ajuts municipals al lloguer**: hi ha convocatòries específiques a diversos municipis de l'àrea metropolitana de Barcelona (L'Hospitalet, Badalona, Sant Adrià, etc.).
+
+## Enllaços útils
+
+- Consorci de l'Habitatge de Barcelona – Borsa d'Habitatge: https://www.habitatgebarcelona.cat/ca/serveis/lloguer/mediacio
+- Barcelona.cat – Joves i habitatge: https://ajuntament.barcelona.cat/joves/ca
+- Oficines de l'Habitatge de Barcelona: https://habitatge.barcelona/ca/oficines
+
+## Font
+
+Informació extreta del **Consorci de l'Habitatge de Barcelona** i de les seves oficines d'habitatge, amb referència a la **Borsa d'Habitatge de Lloguer** i a la **Borsa Jove**, consultada el **7 de febrer de 2026**. El servei s'actualitza de manera contínua i prioritza llars amb ingressos inferiors a 2,35 vegades l'IRSC i ofereix avantatges com la cobertura de la fiança i el primer mes de lloguer.

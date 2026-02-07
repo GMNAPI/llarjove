@@ -27,6 +27,14 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+temp/
+
+# Local pnpm cache
+.pnpm-store/
+
+# Web: vitest compiled artifacts
+web/vitest.config.js
+web/vitest.config.d.ts
 
 # Vector store - included for production deployment
 # data/vector_store.json

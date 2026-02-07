@@ -62,6 +62,21 @@ export function chunkAidDocument(
     });
   }
 
+  // Fallback: if sectioning produced no chunks (e.g. regex/format mismatch), use full doc
+  if (chunks.length === 0 && normalizedText.trim()) {
+    const metadata: AidMetadata = {
+      programName,
+      section: 'Informació general',
+      sourceFile,
+      sourceUrl: aidInfo.sourceUrl,
+    };
+    chunks.push({
+      id: `${slugify(programName)}-general-0`,
+      text: buildAidChunkText(programName, 'Informació general', normalizedText.trim()),
+      metadata,
+    });
+  }
+
   return chunks;
 }
 

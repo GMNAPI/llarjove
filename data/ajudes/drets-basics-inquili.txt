@@ -1,0 +1,67 @@
+# Guia de drets bàsics de l'inquilí/ina
+
+## Què és?
+
+Aquesta guia pràctica resumeix els **drets i obligacions bàsiques de les persones arrendatàries (inquilins/ines)** segons la **Llei d'Arrendaments Urbans (LAU) – Llei 29/1994** i la **Llei 12/2023 de l'habitatge**. Inclou l'actualització de la normativa vigent a 2026 i s'adreça a joves i famílies que lloguen un habitatge a Catalunya.
+
+## Duració mínima del contracte
+
+- **5 anys** quan el propietari és persona física i **7 anys** quan el propietari és una persona jurídica.
+- Passat aquest termini, el contracte es prorroga **tàcitament** fins a **3 anys** més, excepte si el llogater notifica la voluntat de no renovar amb 30 dies d'antelació o el propietari amb 4 mesos d'antelació.
+- En casos de vulnerabilitat acreditada, es poden concedir **pròrrogues extraordinàries** d'1 any i, en zones tensionades, fins a **tres anys addicionals**.
+
+## Actualització de la renda
+
+- L'actualització anual de la renda es limita al **2 % l'any 2023**, **3 % l'any 2024** i, a partir de **2025**, al nou **Índex de Referència d'Arrendaments d'Habitatge (IRAV)**.
+- Les actualitzacions es duen a terme en la data que indiqui el contracte i només poden basar-se en l'índex publicat; no es poden aplicar increments superiors ni clàusules d'actualització automàtica per damunt d'aquests topalls.
+
+## Fiança i garanties
+
+- El **propietari ha d'exigir una fiança en metàl·lic equivalent a una mensualitat** de la renda en el lloguer d'habitatges. Per a locals comercials o altres usos és de dues mensualitats.
+- La fiança **no es pot actualitzar** durant els **primer cinc anys** del contracte (o set anys si l'arrendador és persona jurídica).
+- Es poden pactar **garanties addicionals**, però en l'arrendament d'habitatge no poden superar **dues mensualitats** de la renda.
+- El propietari ha de retornar la fiança un cop finalitzat el contracte; si triga més d'un mes després de rebre les claus, haurà d'abonar **interessos legals**.
+
+## Dret de desistiment (rescissió anticipada)
+
+- L'inquilí pot **desistir del contracte** una vegada transcorreguts **sis mesos**, sempre que ho comuniqui al propietari amb una antelació mínima de **30 dies**.
+- El contracte pot establir una **indemnització** per al propietari equivalent a una mensualitat de la renda per cada any que resti fins al compliment del contracte, o la part proporcional dels mesos restants.
+
+## Pròrrogues i finalització del contracte
+
+- Si cap de les parts notifica la seva voluntat de no renovar dins dels terminis (30 dies l'inquilí, 4 mesos el propietari), el contracte es prorroga automàticament per períodes anuals fins a tres anys.
+- El propietari només pot recuperar l'habitatge abans del termini si acredita necessitat d'ús per a si mateix o familiars de primer grau i aquesta clàusula s'ha inclòs en el contracte.
+
+## Reparacions i manteniment
+
+- **El propietari** està obligat a realitzar, sense dret a augmentar la renda, **totes les reparacions necessàries** per conservar l'habitatge en condicions d'habitabilitat. Aquesta obligació queda limitada si el deteriorament és imputable a l'inquilí.
+- **L'arrendatari** ha de suportar les obres de conservació que no es puguin diferir fins al final del contracte, i la renda es redueix proporcionalment si la reparació dura més de 20 dies.
+- Les **petites reparacions** derivades del desgast per l'ús ordinari de l'habitatge són a càrrec de l'inquilí.
+- L'inquilí ha de comunicar al propietari la necessitat de reparacions tan aviat com sigui possible i pot executar reparacions urgents per evitar danys, reclamant-ne l'import al propietari.
+
+## Subarrendament i cessió
+
+- El **subarrendament** de la totalitat de l'habitatge està prohibit tret que el propietari el consenti per escrit. En cas de subarrendar part de l'habitatge (habitacions), el preu no pot superar el lloguer proporcional i el contracte ha de respectar la LAU i la normativa autonòmica. La Llei 12/2023 ha introduït una regulació específica del lloguer d'habitacions, que obliga a formalitzar contractes escrits i a respectar les mateixes garanties de pròrroga i actualització de renda.
+- La **cessió del contracte** (transmissió de la posició d'inquilí a una altra persona) requereix l'autorització prèvia del propietari.
+
+## Dret d'adquisició preferent (tanteig i retracte)
+
+- Si el propietari decideix vendre la vivenda arrendada, l'inquilí té **dret de tanteig**: pot adquirir l'habitatge en les mateixes condicions que l'oferta rebuda, en un termini de **30 dies naturals** des de la notificació.
+- Si la venda es fa sense notificar o en condicions més avantatjoses, l'inquilí pot exercir el **dret de retracte** i subrogar-se en la compra en les mateixes condicions, també en un termini de **30 dies** des de la notificació de la venda.
+- Aquests drets tenen preferència sobre altres drets de tanteig, excepte el retracte del condueño o el que estigui inscrit prèviament al Registre de la Propietat.
+- El dret de tanteig i retracte pot ser **renunciat per pacte**; en aquest cas el propietari ha de comunicar igualment la intenció de vendre amb una antelació mínima de 30 dies.
+
+## Protecció contra desnonaments i mesures socials
+
+- La Llei 12/2023 estableix que, abans de procedir a un **desnonament per impagament**, el jutge ha de consultar els **serveis socials** per valorar la situació de vulnerabilitat de la unitat de convivència. Si es confirma la vulnerabilitat, s'han d'oferir mesures com ajornaments, lloguer social o allotjaments alternatius.
+- En casos d'inquilins vulnerables en zones tensionades, el contracte pot prorrogar-se fins a **tres anys addicionals**.
+
+## Enllaços útils
+
+- BOE – Llei d'Arrendaments Urbans (text consolidat): https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003
+- BOE – Llei 12/2023, del 24 de maig, pel dret a l'habitatge: https://www.boe.es/eli/es/l/2023/05/24/12
+- Institut Català del Sòl (INCASÒL) – dipòsit de fiança: https://incasol.gencat.cat
+
+## Font
+
+Informació extreta de la **Llei d'Arrendaments Urbans (LAU)** i de la **Llei 12/2023**, amb consultes realitzades el **7 de febrer de 2026**. Els articles 21, 36 i 25 de la LAU regulen respectivament les reparacions, la fiança i els drets de tanteig i retracte. La Llei 12/2023 fixa la durada mínima dels contractes, les pròrrogues i els límits d'actualització de la renda.
