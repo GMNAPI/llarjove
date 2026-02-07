@@ -38,7 +38,8 @@ export async function initLocalVectorStore(path?: string): Promise<void> {
       const data = readFileSync(storePath, 'utf-8');
       storeData = JSON.parse(data);
       console.log(`Local vector store loaded: ${storeData.chunks.length} chunks`);
-    } catch {
+    } catch (error) {
+      console.error(`Failed to load vector store from ${storePath}:`, error);
       console.log('Creating new local vector store');
       storeData = { chunks: [], version: 1 };
     }

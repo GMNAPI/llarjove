@@ -168,7 +168,33 @@ El frontend inclou un **design system complet** amb:
 - **Tailwind v4**: CSS-first configuration amb `@theme inline`
 - **Living style guide**: `/web/src/components/BrandShowcase.tsx`
 
-Visita http://localhost:5173 després de `pnpm dev:web` per veure el showcase.
+Visita http://localhost:3000 després de `pnpm dev:web` per veure la landing i el showcase.
+
+## Deployment (Railway)
+
+El projecte es desplega com a **dos serveis** a Railway (mateix repo, dos Dockerfiles).
+
+| Servei | Dockerfile | Config | Port |
+|--------|------------|--------|------|
+| **RAG API** | `Dockerfile` | `railway-api.toml` | `PORT` (assignat per Railway) |
+| **Web** | `Dockerfile.web` | `railway-web.toml` | `PORT` (assignat per Railway) |
+
+### Configuració a Railway
+
+Cal **dos serveis** al mateix projecte Railway:
+
+1. **Servei RAG API** (el xat i la API)
+   - Build: Dockerfile `./Dockerfile` (o config `railway-api.toml`).
+   - Variables: `OPENAI_API_KEY`, `CHROMA_HOST`, `CHROMA_PORT`, `CHROMA_COLLECTION` (si Chroma extern). Railway injecta `PORT`.
+   - Health check: `/health`.
+   - En desplegar, Railway assigna una URL (ex: `https://llarjove-api-production.up.railway.app`). **Aquesta URL és on es troba el xat**: en obrir-la al navegador es mostra la interfície del assistent RAG.
+
+2. **Servei Web** (landing)
+   - Build: Dockerfile `./Dockerfile.web` (o config `railway-web.toml`).
+   - Variables: **`NEXT_PUBLIC_API_URL`** = URL pública del servei RAG API (la mateixa que obres per al xat). Sense aquesta variable, la landing no mostrarà el botó "Probar el chat". Railway injecta `PORT`.
+   - Health check: `/`.
+
+Cada servei rep un `PORT` dinàmic; no hi ha conflicte de ports.
 
 ## Roadmap
 
