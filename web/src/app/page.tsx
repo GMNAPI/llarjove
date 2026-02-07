@@ -66,8 +66,6 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 import { WaitlistForm } from './WaitlistForm';
 
-const CHAT_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
-
 export default function Page() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-secondary text-foreground">
@@ -87,14 +85,9 @@ export default function Page() {
           </div>
 
           <nav className="hidden sm:flex items-center gap-6 text-sm text-muted-foreground">
-            {CHAT_URL ? (
-              <a
-                href={CHAT_URL}
-                className="hover:text-foreground font-medium text-primary"
-              >
-                Probar el chat
-              </a>
-            ) : null}
+            <Link href="/chat" className="hover:text-foreground font-medium text-primary">
+              Probar el chat
+            </Link>
             <Link href="#como-funciona" className="hover:text-foreground">
               Cómo funciona
             </Link>
@@ -110,17 +103,15 @@ export default function Page() {
           </nav>
 
           <div className="flex items-center gap-2">
-            {CHAT_URL ? (
-              <a
-                href={CHAT_URL}
-                className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
-              >
-                Probar el chat
-              </a>
-            ) : null}
+            <Link
+              href="/chat"
+              className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
+            >
+              Probar el chat
+            </Link>
             <Link
               href="#waitlist"
-              className="inline-flex items-center justify-center rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary"
+              className="hidden sm:inline-flex items-center justify-center rounded-xl border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground hover:bg-secondary"
             >
               Únete a la lista
             </Link>
@@ -152,14 +143,12 @@ export default function Page() {
             </p>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              {CHAT_URL ? (
-                <a
-                  href={CHAT_URL}
-                  className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-base font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
-                >
-                  Probar el asistente
-                </a>
-              ) : null}
+              <Link
+                href="/chat"
+                className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-base font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
+              >
+                Probar el asistente
+              </Link>
               <Link
                 href="#waitlist"
                 className="inline-flex items-center justify-center rounded-xl border border-border bg-card px-5 py-3 text-base font-semibold text-foreground hover:bg-secondary"
