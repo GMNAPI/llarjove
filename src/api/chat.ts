@@ -6,8 +6,10 @@
 
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { query, queryStream, retrieve } from '../rag.js';
-import { getStats, isLocalMode } from '../retrieval/index.js';
+import { getStats, isLocalMode, queryChunks } from '../retrieval/index.js';
 import { getPrograms, getProgramById, getUpcomingDeadlines } from '../resources/programs.js';
+import { generateEmbedding } from '../ingestion/index.js';
+import { ragConfig } from '../config.js';
 import type { ChatRequest, ChatResponse, ChatMessage, LegalMetadata, AidMetadata } from '../types.js';
 
 interface ChatBody {
@@ -91,6 +93,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
 
   /**
    * POST /retrieve - Get relevant chunks without generation (for debugging)
+   * Enhanced with embedding prefixes for diagnosis
    */
   app.post<{ Body: RetrieveBody }>(
     '/retrieve',
@@ -109,10 +112,14 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
       const { question } = request.body;
 
       try {
+        // Generate embedding for the question
+        const questionEmbedding = await generateEmbedding(question);
         const results = await retrieve(question);
+
         return {
           question,
-          results: results.map(r => {
+          queryEmbedding: questionEmbedding.slice(0, 10), // First 10 values for comparison
+          chunks: results.map(r => {
             const meta = r.chunk.metadata;
             // Handle both legal and aid chunks
             if ('law' in meta) {
@@ -124,6 +131,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
                 law: legalMeta.law,
                 title: legalMeta.articleTitle,
                 text: r.chunk.text.slice(0, 500) + '...',
+                embeddingPrefix: r.chunk.embedding?.slice(0, 10), // First 10 values
               };
             } else {
               const aidMeta = meta as AidMetadata;
@@ -133,6 +141,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
                 program: aidMeta.programName,
                 section: aidMeta.section,
                 text: r.chunk.text.slice(0, 500) + '...',
+                embeddingPrefix: r.chunk.embedding?.slice(0, 10), // First 10 values
               };
             }
           }),
@@ -169,6 +178,55 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
           documentCount: 0,
         },
       };
+    }
+  });
+
+  /**
+   * GET /debug - Comprehensive debug information
+   * Shows version, config, and sample embeddings for prod/local comparison
+   */
+  app.get('/debug', async (request, reply) => {
+    try {
+      const stats = await getStats();
+
+      // Get sample embeddings from a test query
+      const testEmbedding = await generateEmbedding('test');
+      const sampleChunks = await queryChunks(testEmbedding, 3);
+
+      return {
+        version: {
+          commit: process.env['RAILWAY_GIT_COMMIT_SHA'] || 'unknown',
+          buildTime: process.env['BUILD_TIME'] || 'unknown',
+          nodeVersion: process.version,
+        },
+        config: {
+          chatModel: ragConfig.chatModel,
+          embeddingModel: ragConfig.embeddingModel,
+          temperature: 0.3,
+          maxChunks: ragConfig.maxChunks,
+          similarityThreshold: ragConfig.similarityThreshold,
+        },
+        vectorStore: {
+          mode: isLocalMode() ? 'local' : 'chroma',
+          documentCount: stats.count,
+          sampleEmbeddings: sampleChunks.slice(0, 2).map(c => ({
+            id: c.chunk.id,
+            type: 'programName' in c.chunk.metadata ? 'aid' : 'legal',
+            embeddingPrefix: c.chunk.embedding?.slice(0, 5), // First 5 values
+          })),
+        },
+        environment: {
+          hasOpenAIKey: !!process.env['OPENAI_API_KEY'],
+          openAIKeyPrefix: process.env['OPENAI_API_KEY']?.slice(0, 10) || 'missing',
+          platform: process.platform,
+        },
+      };
+    } catch (error) {
+      request.log.error(error, 'Debug endpoint failed');
+      reply.status(500).send({
+        error: 'Debug failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+      });
     }
   });
 
