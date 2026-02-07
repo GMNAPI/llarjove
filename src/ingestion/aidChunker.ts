@@ -62,6 +62,21 @@ export function chunkAidDocument(
     });
   }
 
+  // Fallback: if sectioning produced no chunks (e.g. regex/format mismatch), use full doc
+  if (chunks.length === 0 && normalizedText.trim()) {
+    const metadata: AidMetadata = {
+      programName,
+      section: 'Informació general',
+      sourceFile,
+      sourceUrl: aidInfo.sourceUrl,
+    };
+    chunks.push({
+      id: `${slugify(programName)}-general-0`,
+      text: buildAidChunkText(programName, 'Informació general', normalizedText.trim()),
+      metadata,
+    });
+  }
+
   return chunks;
 }
 
@@ -76,8 +91,8 @@ interface Section {
 function splitBySections(text: string): Section[] {
   const sections: Section[] = [];
 
-  // Regex to match ## headers
-  const sectionRegex = /^##\s+([^\n]+)\n([\s\S]*?)(?=^##\s+|$)/gm;
+  // Regex to match ## headers (lookahead must be \n## so content doesn't end at blank line)
+  const sectionRegex = /^##\s+([^\n]+)\n([\s\S]*?)(?=\n##\s+|$)/gm;
 
   let match;
   while ((match = sectionRegex.exec(text)) !== null) {

@@ -46,10 +46,10 @@
 ## Documentos a Ingestar
 
 ### Prioridad Alta
-1. [ ] Guía completa Bono Alquiler Joven 2025
-2. [ ] FAQ ayudas Agència de l'Habitatge
-3. [ ] Derechos básicos inquilino (extracto LAU)
-4. [ ] Listado municipios zona tensionada Catalunya
+1. [x] Guía completa Bono Alquiler Joven 2025
+2. [x] FAQ ayudas Agència de l'Habitatge
+3. [x] Derechos básicos inquilino (extracto LAU)
+4. [x] Listado municipios zona tensionada Catalunya
 
 ### Prioridad Media
 1. [ ] Guía contratos alquiler para jóvenes

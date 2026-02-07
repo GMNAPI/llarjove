@@ -1,0 +1,102 @@
+# Ajudes al pagament del lloguer de la Generalitat (2025)
+
+## Què és?
+
+Les **ajudes al pagament del lloguer** són subvencions concedides per la **Generalitat de Catalunya** a través de l'Agència de l'Habitatge per facilitar l'accés i el manteniment de l'habitatge de lloguer. No es tracta del Bono Joven estatal, sinó de programes propis de la Generalitat diferenciats per franges d'edat i adaptats a la situació socioeconòmica de les persones sol·licitants.
+
+### Programes vigents per al 2025
+
+- **Subvencions per a joves de fins a 35 anys**. Dirigides a persones que no hagin fet 35 anys a 31 de gener de 2025 i que siguin titulars d'un contracte de lloguer o de cessió d'ús de l'habitatge habitual i permanent a Catalunya.
+- **Subvencions per al tram de 36-64 anys**. Destinades a persones amb edats entre 36 i 64 anys que siguin titulars d'un contracte de lloguer de l'habitatge habitual.
+- Altres programes específics (p. ex. per a persones majors de 65 anys o col·lectius vulnerables) es publiquen al llarg de l'any a la web de l'Agència de l'Habitatge.
+
+## Requisits
+
+### Edat
+
+- **Joves**: tenir **menys de 35 anys** el 31/01/2025.
+- **Adults (36-64)**: tenir entre **36 i 64 anys** en el moment de la sol·licitud.
+
+### Residència i contracte
+
+- Estar **empadronat/ada** a l'habitatge objecte de la sol·licitud i que aquest sigui la residència habitual i permanent. Cal acreditar la inscripció al padró municipal.
+- Disposar d'un **contracte de lloguer o de cessió d'ús** formalitzat al seu nom i inscrit en l'INCASÒL (fiança dipositada dins del termini de dos mesos). Els contractes entre familiars fins a segon grau no es consideren subvencionables.
+
+### Ingressos
+
+- Els **ingressos anuals de la unitat de convivència** no poden superar el límit de 25.200 € bruts anuals (3,05 vegades l'IRSC) per a joves i un màxim de 24.301,58 € (3 vegades l'IRSC) per al tram de 36-64 anys. Es calcula segons la declaració de la renda 2023 o certificat d'ingressos.
+- Es tenen en compte els ingressos de totes les persones que figuren al contracte de lloguer.
+
+### Lloguer màxim subvencionable
+
+Els límits varien segons l'àmbit territorial i si es tracta d'un habitatge o una habitació:
+
+| Zona | Lloguer màxim habitatge (joves) | Lloguer màxim habitatge (36‑64) | Lloguer màxim habitació |
+|-----|---------------------------------|---------------------------------|------------------------|
+| **Àrea metropolitana de Barcelona** | 950 €/mes | 900 €/mes | 450 €/mes |
+| **Resta de comarca de Barcelona** | 650 €/mes | 650 €/mes | 350 €/mes (joves); 300 €/mes (36‑64) |
+| **Comarques de Girona** | 750 €/mes | 750 €/mes | 350 €/mes |
+| **Comarques de Tarragona** | 700 €/mes | 700 €/mes | 350 €/mes |
+| **Comarques de Lleida i Terres de l'Ebre** | 600 €/mes | 600 €/mes | 300 €/mes |
+
+Per a famílies nombroses, monoparentals o membres amb discapacitat superior al 33 %, el topall s'incrementa fins a **900 €/mes** o **1.100 €/mes** a l'Àrea metropolitana de Barcelona.
+
+### Altres requisits
+
+- Estar al corrent del pagament del lloguer i poder acreditar-lo amb rebuts bancaris (no s'accepten pagaments en metàl·lic).
+- No ser propietari d'un habitatge ni disposar d'un usufructe que permeti satisfer la necessitat d'habitatge.
+- No haver estat beneficiari/a d'ajudes al lloguer incompatibles o no presentar deutes amb l'Agència de l'Habitatge.
+
+## Quantia
+
+La quantia de la subvenció es calcula com un **percentatge del cost anual del lloguer** en funció de la relació entre renda de lloguer i ingressos de la unitat de convivència:
+
+- **20 %** del lloguer anual si l'esforç per al pagament del lloguer és igual o inferior al 30 % dels ingressos.
+- **30 %** quan el lloguer suposa entre el 30 % i el 40 % dels ingressos.
+- **40 %** si el lloguer supera el 40 % dels ingressos.
+
+La **subvenció anual màxima** és de **3.000 €** per habitatge i la mínima de **240 €** per any. En el programa de 36-64 anys la subvenció mensual màxima és de **200 €** per habitatge i la mínima de **20 €**. La suma de les ajudes de tots els convivents no pot superar el **75 % del lloguer mensual**.
+
+## Terminis de sol·licitud
+
+- **Joves (2025)**: la convocatòria s'obre **el 30 de juny de 2025 a les 09:00 h** i es tanca **l'11 de juliol de 2025 a les 14:00 h**. Les sol·licituds es resolen per un sistema de puntuació i no per ordre de presentació.
+- **Adults (36-64)**: el termini de 2025 va ser del **10 de març de 2025** al **11 d'abril de 2025**. En futures convocatòries es preveu un calendari similar.
+
+## Documentació necessària
+
+- **Sol·licitud normalitzada** disponible al web de l'Agència de l'Habitatge.
+- **Contracte de lloguer** o cessió d'ús signat i còpia dels rebuts de fiança (dipositats a l'INCASÒL).
+- **Justificant del dipòsit de fiança** a l'INCASÒL, que s'ha de fer dins dels dos mesos posteriors a la signatura del contracte.
+- **Certificat d'empadronament** que acrediti la residència en l'habitatge.
+- **DNI o NIE** de totes les persones que figuren a la sol·licitud.
+- **Declaració de la renda 2023** o certificats d'ingressos de tots els membres de la unitat de convivència.
+- **Justificants de pagament del lloguer** (rebuts bancaris) dels mesos previs a la convocatòria.
+- En el cas de lloguer d'habitació, **autorització escrita de la persona propietària**.
+
+## Exclusions
+
+- Contractes de lloguer entre persones unides per parentiu fins a segon grau o vinculades societàriament.
+- Persones que ja reben el **Bono Joven estatal** per al pagament del lloguer.
+- Contractes en què el lloguer superi els límits màxims establerts.
+- Persones propietàries d'un habitatge (excepte casos de separació amb resolució judicial).
+- Sol·licituds que no compleixin els requisits d'ingressos o documentació obligatòria.
+
+## Ajudes alternatives
+
+Si no es compleixen els requisits d'aquesta subvenció, es poden valorar altres ajuts:
+
+- **Borsa Jove d'Habitatge**: servei municipal que ofereix pisos a lloguer amb preu inferior al de mercat i facilita el dipòsit, la primera mensualitat i l'assegurança. Vegeu el document corresponent.
+- **Ajut d'urgència per a persones vulnerables** gestionat pels serveis socials municipals, que pot cobrir fins a tres mesos de lloguer.
+- **Programes municipals** d'ajudes al lloguer: molts ajuntaments (Barcelona, L'Hospitalet, Terrassa, Girona, etc.) ofereixen ajudes específiques. Consulteu el document «ajudes-per-municipi».
+- **Habitatge protegit de lloguer (HPO)**: inscriure's al registre per accedir a pisos de protecció oficial a preu reduït. Vegeu el document «habitatge-protegit-hpo».
+
+## Enllaços útils
+
+- Agència de l'Habitatge de Catalunya – Subvencions al pagament del lloguer de joves (2025): https://habitatge.gencat.cat/ca/ambits/ajuts/subvencionslloguer/joves/
+- Agència de l'Habitatge de Catalunya – Subvencions al pagament del lloguer per a persones entre 36 i 64 anys (2025): https://habitatge.gencat.cat/ca/ambits/ajuts/subvencionslloguer/36-64/
+- Institut Català del Sòl (INCASÒL) – Dipòsit de fiançes: https://incasol.gencat.cat
+- Pàgina de preguntes freqüents sobre les subvencions al lloguer: https://habitatge.gencat.cat/ca/ajuts/frequent/
+
+## Font
+
+Informació obtinguda de l'**Agència de l'Habitatge de Catalunya** (convocatòria 2025), consultada el **7 de febrer de 2026** i actualitzada a **20 de juny de 2025**, així com de la normativa del **Institut Català del Sòl (INCASÒL)**, i de les preguntes freqüents de la mateixa Agència. També s'han utilitzat els topalls i percentatges que estableixen les bases de les convocatòries.
