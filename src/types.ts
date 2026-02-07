@@ -80,16 +80,46 @@ export interface ChatRequest {
   conversationHistory?: ChatMessage[];
 }
 
+// ============================================
+// Actionable Fallback System
+// ============================================
+
+/**
+ * Official resource with clickable URL
+ * Used for fallback when confidence=none
+ */
+export interface ActionableResource {
+  title: string;           // "Agència de l'Habitatge de Catalunya"
+  url: string;             // "https://habitatge.gencat.cat"
+  description?: string;    // Brief description
+  category?: 'aid' | 'legal' | 'general';
+}
+
+/**
+ * Verification checklist for user guidance
+ * Used for fallback when confidence=none
+ */
+export interface VerificationChecklist {
+  title: string;           // "Passos per sol·licitar ajudes"
+  steps: string[];         // ["Comprova la teva edat...", ...]
+}
+
 export interface ChatResponse {
   answer: string;
   sources: SourceCitation[];
   confidence: 'high' | 'medium' | 'low' | 'none';
+
+  // Fallback fields for confidence=none
+  actionableResources?: ActionableResource[];
+  checklist?: VerificationChecklist;
+  followUpQuestion?: string;
 }
 
 export interface SourceCitation {
   article: string;
   law: string;
   excerpt: string;
+  url?: string;  // Clickable URL (e.g., tramits.gencat.cat)
 }
 
 export interface RAGConfig {

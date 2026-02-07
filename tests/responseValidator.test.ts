@@ -8,8 +8,10 @@ import {
   validateCitations,
   determineConfidence,
   buildValidatedResponse,
+  enrichCitationsWithUrls,
+  addWarningsIfNeeded,
 } from '../src/generation/responseValidator.js';
-import type { RetrievalResult } from '../src/types.js';
+import type { RetrievalResult, SourceCitation, ChatResponse } from '../src/types.js';
 
 describe('extractCitations', () => {
   it('should extract standard citations', () => {
@@ -224,5 +226,154 @@ describe('buildValidatedResponse', () => {
     expect(response.sources[0]?.article).toBe('Artículo 9');
     expect(response.sources[0]?.law).toBe('LAU');
     expect(response.sources[0]?.excerpt).toBeTruthy();
+  });
+});
+
+describe('enrichCitationsWithUrls', () => {
+  it('should add URL for known program citations', () => {
+    const citations: SourceCitation[] = [
+      { article: 'Bono Alquiler Joven 2025', law: 'Programa', excerpt: '' },
+    ];
+    const enriched = enrichCitationsWithUrls(citations);
+
+    expect(enriched[0]?.url).toBe('https://tramits.gencat.cat/es/tramits/tramits-temes/22866_Bo_lloguer_joves');
+  });
+
+  it('should add URL for LAU citations', () => {
+    const citations: SourceCitation[] = [
+      { article: 'Artículo 9', law: 'LAU', excerpt: '' },
+    ];
+    const enriched = enrichCitationsWithUrls(citations);
+
+    expect(enriched[0]?.url).toBe('https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003');
+  });
+
+  it('should add URL for LPH citations', () => {
+    const citations: SourceCitation[] = [
+      { article: 'Artículo 5', law: 'LPH', excerpt: '' },
+    ];
+    const enriched = enrichCitationsWithUrls(citations);
+
+    expect(enriched[0]?.url).toBe('https://portaljuridic.gencat.cat/eli/es-ct/l/2023/03/21/1');
+  });
+
+  it('should handle citations without known URLs', () => {
+    const citations: SourceCitation[] = [
+      { article: 'Artículo X', law: 'Unknown Law', excerpt: '' },
+    ];
+    const enriched = enrichCitationsWithUrls(citations);
+
+    expect(enriched[0]?.url).toBeUndefined();
+  });
+
+  it('should enrich multiple citations', () => {
+    const citations: SourceCitation[] = [
+      { article: 'Artículo 9', law: 'LAU', excerpt: '' },
+      { article: 'Bono', law: 'Programa', excerpt: '' },
+    ];
+    const enriched = enrichCitationsWithUrls(citations);
+
+    expect(enriched).toHaveLength(2);
+    expect(enriched[0]?.url).toBeDefined();
+    expect(enriched[1]?.url).toBeDefined();
+  });
+});
+
+describe('addWarningsIfNeeded', () => {
+  it('should enrich sources for high confidence responses', () => {
+    const response: ChatResponse = {
+      answer: 'El plazo es 5 años [Artículo 9, LAU].',
+      sources: [{ article: 'Artículo 9', law: 'LAU', excerpt: '' }],
+      confidence: 'high',
+    };
+
+    const processed = addWarningsIfNeeded(response);
+
+    expect(processed.sources[0]?.url).toBeDefined();
+    expect(processed.answer).not.toContain('_Nota:');
+  });
+
+  it('should enrich sources for medium confidence responses', () => {
+    const response: ChatResponse = {
+      answer: 'Información relevante.',
+      sources: [{ article: 'Artículo 9', law: 'LAU', excerpt: '' }],
+      confidence: 'medium',
+    };
+
+    const processed = addWarningsIfNeeded(response);
+
+    expect(processed.sources[0]?.url).toBeDefined();
+  });
+
+  it('should add warning note for low confidence', () => {
+    const response: ChatResponse = {
+      answer: 'Información limitada.',
+      sources: [{ article: 'Artículo 9', law: 'LAU', excerpt: '' }],
+      confidence: 'low',
+    };
+
+    const processed = addWarningsIfNeeded(response);
+
+    expect(processed.answer).toContain('_Nota: Aquesta resposta té confiança baixa');
+    expect(processed.sources[0]?.url).toBeDefined();
+  });
+
+  it('should replace answer for none confidence and add resources', () => {
+    const response: ChatResponse = {
+      answer: 'Original answer',
+      sources: [],
+      confidence: 'none',
+    };
+    const question = '¿Cómo solicitar el Bono Joven?';
+
+    const processed = addWarningsIfNeeded(response, question);
+
+    expect(processed.answer).toContain('específica sobre aquesta ajuda');
+    expect(processed.answer).not.toBe('Original answer');
+    expect(processed.actionableResources).toBeDefined();
+    expect(processed.actionableResources?.length).toBe(3);
+    expect(processed.checklist).toBeDefined();
+    expect(processed.checklist?.steps.length).toBeGreaterThan(0);
+  });
+
+  it('should generate follow-up question for aid queries without details', () => {
+    const response: ChatResponse = {
+      answer: 'Original',
+      sources: [],
+      confidence: 'none',
+    };
+    const question = 'Quiero una ayuda';
+
+    const processed = addWarningsIfNeeded(response, question);
+
+    expect(processed.followUpQuestion).toBeDefined();
+    expect(processed.followUpQuestion).toContain('edat');
+  });
+
+  it('should not generate follow-up for detailed queries', () => {
+    const response: ChatResponse = {
+      answer: 'Original',
+      sources: [],
+      confidence: 'none',
+    };
+    const question = 'Tengo 25 años y gano 20000 euros, ¿puedo solicitar el Bono Joven?';
+
+    const processed = addWarningsIfNeeded(response, question);
+
+    expect(processed.followUpQuestion).toBeUndefined();
+  });
+
+  it('should use contextual fallback messages', () => {
+    const aidResponse: ChatResponse = { answer: '', sources: [], confidence: 'none' };
+    const contractResponse: ChatResponse = { answer: '', sources: [], confidence: 'none' };
+    const legalResponse: ChatResponse = { answer: '', sources: [], confidence: 'none' };
+
+    const aid = addWarningsIfNeeded(aidResponse, 'Ayudas de vivienda');
+    const contract = addWarningsIfNeeded(contractResponse, 'Firmar contrato');
+    const legal = addWarningsIfNeeded(legalResponse, '¿Qué dice la LAU?');
+
+    expect(aid.answer).toContain('ajuda');
+    expect(contract.answer).toContain('contracte');
+    expect(legal.answer).toContain('legal');
   });
 });
