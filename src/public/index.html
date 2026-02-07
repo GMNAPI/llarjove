@@ -4,18 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LlarJove - Ajuda per trobar habitatge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --blanc: white;
-      --fons: #1a1f2e;
-      --fons-card: #252b3b;
-      --accent: #f59e0b;
-      --accent-light: #fbbf24;
-      --text: #e2e8f0;
-      --text-soft: #94a3b8;
+      --fons: #FAFBFC;
+      --fons-card: #FFFFFF;
+      --accent: #00A89D;
+      --accent-light: #D0F4F1;
+      --text: #2B3A50;
+      --text-soft: #6B7280;
       --success: #10b981;
-      --warning: #f59e0b;
-      --error: #ef4444;
+      --warning: #00A89D;
+      --error: #D85C5C;
     }
 
     * {
@@ -25,7 +28,7 @@
     }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Geist', system-ui, -apple-system, sans-serif;
       background: var(--fons);
       min-height: 100vh;
       color: var(--text);
@@ -75,7 +78,7 @@
       background: var(--fons-card);
       border-radius: 12px;
       padding: 1.25rem;
-      border: 1px solid rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(0, 168, 157, 0.2);
       transition: all 0.2s;
     }
 
@@ -106,7 +109,7 @@
       font-size: 0.75rem;
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
-      background: rgba(245, 158, 11, 0.15);
+      background: rgba(0, 168, 157, 0.15);
       color: var(--accent-light);
     }
 
@@ -123,7 +126,7 @@
     /* Chat container */
     .chat-container {
       background: var(--fons-card);
-      border: 1px solid rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(0, 168, 157, 0.2);
       border-radius: 16px;
       overflow: hidden;
     }
@@ -131,7 +134,7 @@
     .response-area {
       min-height: 180px;
       padding: 1.5rem;
-      border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+      border-bottom: 1px solid rgba(0, 168, 157, 0.1);
     }
 
     .empty-state {
@@ -213,7 +216,7 @@
 
     .suggestions {
       padding: 1rem 1.5rem;
-      border-bottom: 1px solid rgba(245, 158, 11, 0.1);
+      border-bottom: 1px solid rgba(0, 168, 157, 0.1);
     }
 
     .suggestions-title {
@@ -231,8 +234,8 @@
     }
 
     .chip {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: rgba(0, 168, 157, 0.1);
+      border: 1px solid rgba(0, 168, 157, 0.3);
       color: var(--accent-light);
       padding: 0.5rem 1rem;
       border-radius: 20px;
@@ -242,7 +245,7 @@
     }
 
     .chip:hover {
-      background: rgba(245, 158, 11, 0.2);
+      background: rgba(0, 168, 157, 0.2);
       border-color: var(--accent);
     }
 
@@ -255,7 +258,7 @@
     input[type="text"] {
       flex: 1;
       background: var(--fons);
-      border: 1px solid rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(0, 168, 157, 0.2);
       border-radius: 12px;
       padding: 1rem 1.25rem;
       color: var(--blanc);
