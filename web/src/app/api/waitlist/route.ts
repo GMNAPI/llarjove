@@ -1,13 +1,9 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 // With Resend test email (onboarding@resend.dev), emails can only be sent to
 // your own verified account email. Set WAITLIST_FROM_EMAIL once you have a
 // verified domain to also send confirmation emails to users.
-const FROM_EMAIL = process.env.WAITLIST_FROM_EMAIL ?? 'onboarding@resend.dev';
-const NOTIFY_EMAIL = process.env.WAITLIST_NOTIFY_EMAIL ?? '';
 
 interface WaitlistBody {
   email: string;
@@ -29,6 +25,16 @@ export async function POST(req: NextRequest) {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: 'Email inválido' }, { status: 400 });
   }
+
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.error('[waitlist] RESEND_API_KEY not set');
+    return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
+  }
+
+  const resend = new Resend(apiKey);
+  const FROM_EMAIL = process.env.WAITLIST_FROM_EMAIL ?? 'onboarding@resend.dev';
+  const NOTIFY_EMAIL = process.env.WAITLIST_NOTIFY_EMAIL ?? '';
 
   try {
     if (!NOTIFY_EMAIL) {
