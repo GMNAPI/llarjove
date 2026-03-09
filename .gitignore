@@ -41,3 +41,4 @@ web/vitest.config.d.ts
 
 # Claude Code project files
 .claude/
+web/.npmrc
