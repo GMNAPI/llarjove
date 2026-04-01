@@ -45,3 +45,9 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Install web dependencies
+        run: pnpm --dir web install --frozen-lockfile
+
+      - name: Build web
+        run: pnpm build:web
