@@ -232,11 +232,11 @@ describe('buildValidatedResponse', () => {
 describe('enrichCitationsWithUrls', () => {
   it('should add URL for known program citations', () => {
     const citations: SourceCitation[] = [
-      { article: 'Bono Alquiler Joven 2025', law: 'Programa', excerpt: '' },
+      { article: 'Bono Alquiler Joven Nacional', law: 'Programa', excerpt: '' },
     ];
     const enriched = enrichCitationsWithUrls(citations);
 
-    expect(enriched[0]?.url).toBe('https://tramits.gencat.cat/es/tramits/tramits-temes/22866_Bo_lloguer_joves');
+    expect(enriched[0]?.url).toBe('https://www.mivau.gob.es/vivienda/ayudas-y-financiacion/bono-alquiler-joven');
   });
 
   it('should add URL for LAU citations', () => {
