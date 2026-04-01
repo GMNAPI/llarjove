@@ -104,10 +104,10 @@ export default function Page() {
 
           <div className="flex items-center gap-2">
             <Link
-              href="/chat"
+              href="/finder"
               className="inline-flex items-center justify-center rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
             >
-              Probar el chat
+              Comprova ajudes
             </Link>
             <Link
               href="#waitlist"
@@ -144,16 +144,16 @@ export default function Page() {
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/chat"
+                href="/finder"
                 className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-base font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
               >
-                Probar el asistente
+                Comprova les teves ajudes →
               </Link>
               <Link
-                href="#waitlist"
+                href="/chat"
                 className="inline-flex items-center justify-center rounded-xl border border-border bg-card px-5 py-3 text-base font-semibold text-foreground hover:bg-secondary"
               >
-                Únete a la lista
+                Probar el asistente
               </Link>
               <Link
                 href="#como-funciona"

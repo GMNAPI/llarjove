@@ -546,6 +546,12 @@
     const answerEl = document.getElementById('answer');
     const metadata = document.getElementById('metadata');
 
+    // Pre-fill from ?q= param (Finder handoff)
+    const prefilledQ = new URLSearchParams(window.location.search).get('q');
+    if (prefilledQ) {
+      input.value = prefilledQ;
+    }
+
     function askQuestion(question) {
       input.value = question;
       sendQuestion();
