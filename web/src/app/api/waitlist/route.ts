@@ -1,4 +1,3 @@
-import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 
 // With Resend test email (onboarding@resend.dev), emails can only be sent to
@@ -32,6 +31,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
   }
 
+  const { Resend } = await import('resend');
   const resend = new Resend(apiKey);
   const FROM_EMAIL = process.env.WAITLIST_FROM_EMAIL ?? 'onboarding@resend.dev';
   const NOTIFY_EMAIL = process.env.WAITLIST_NOTIFY_EMAIL ?? '';
