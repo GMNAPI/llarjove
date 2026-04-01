@@ -4,7 +4,7 @@ FROM node:20-slim AS builder
 WORKDIR /app
 
 COPY web/package.json web/pnpm-lock.yaml* ./
-RUN npm install -g pnpm@9 && pnpm install --frozen-lockfile
+RUN npm install -g pnpm@9 && NODE_ENV=development pnpm install --frozen-lockfile
 
 COPY web/ .
 RUN mkdir -p public
