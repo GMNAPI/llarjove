@@ -27,7 +27,7 @@ export const openaiConfig = {
 
 export const ragConfig: RAGConfig = {
   embeddingModel: getEnvVar('EMBEDDING_MODEL', 'text-embedding-3-small'),
-  chatModel: getEnvVar('CHAT_MODEL', 'gpt-4-turbo-preview'),
+  chatModel: getEnvVar('CHAT_MODEL', 'gpt-5.4-nano'),
   maxChunks: getEnvNumber('MAX_CHUNKS', 5),
   similarityThreshold: parseFloat(getEnvVar('SIMILARITY_THRESHOLD', '0.65')),
 };

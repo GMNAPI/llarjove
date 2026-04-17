@@ -239,7 +239,7 @@ export async function registerChatRoutes(app: FastifyInstance): Promise<void> {
       documentCount: stats.count,
       models: {
         embedding: process.env['EMBEDDING_MODEL'] ?? 'text-embedding-3-small',
-        chat: process.env['CHAT_MODEL'] ?? 'gpt-4-turbo-preview',
+        chat: process.env['CHAT_MODEL'] ?? 'gpt-5.4-nano',
       },
     };
   });
