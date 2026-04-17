@@ -61,7 +61,7 @@ export async function query(
       content: m.content,
     })),
     temperature: 0.3, // Low temperature for factual responses
-    max_tokens: 1000,
+    max_completion_tokens: 1000,
   });
 
   const answer = completion.choices[0]?.message?.content ?? 'Error generando respuesta.';
@@ -106,7 +106,7 @@ export async function queryStream(
       content: m.content,
     })),
     temperature: 0.3,
-    max_tokens: 1000,
+    max_completion_tokens: 1000,
     stream: true,
   });
 
