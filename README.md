@@ -1,5 +1,7 @@
 # LlarJove
 
+## 🚀 Desplegado en: [llarjove-production.up.railway.app](https://llarjove-production.up.railway.app/)
+
 > Assistent RAG per ajudar joves catalans a trobar habitatge: informació sobre ajudes, drets i recursos.
 
 ## Què és LlarJove?
